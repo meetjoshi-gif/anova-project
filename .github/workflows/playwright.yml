@@ -160,10 +160,6 @@ jobs:
           body: |
             ✅ All test cases passed successfully.
 
-            📊 Summary:
-            ✔ Passed: ${{ steps.test_summary.outputs.passed }}
-            ❌ Failed: ${{ steps.test_summary.outputs.failed }}
-
             📦 Download Full Report (Trace + Video + Screenshot):
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
@@ -184,10 +180,6 @@ jobs:
           from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
           body: |
             ❌ Some test cases failed.
-
-            📊 Summary:
-            ✔ Passed: ${{ steps.test_summary.outputs.passed }}
-            ❌ Failed: ${{ steps.test_summary.outputs.failed }}
 
             📦 Download Artifacts (Trace / Video / Screenshot):
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}

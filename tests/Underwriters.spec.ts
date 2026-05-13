@@ -1,4 +1,5 @@
 import { test, expect, Browser, BrowserContext, Page } from '@playwright/test';
+import path from 'path';
 
 let context: BrowserContext;
 let page: Page;
@@ -38,7 +39,9 @@ test.describe.serial('Underwriter Flow', () => {
         await page.getByRole('textbox', { name: 'Phone' }).fill(phone);
 
         await page.getByRole('textbox', { name: 'Tax ID or EIN' }).fill(taxId);
-        await page.getByRole('button', { name: 'Underwriter Logo' }).setInputFiles('C:\\Users\\meet.joshi\\Anova Project\\uploads\\images.png');
+        const filePath = path.join(process.cwd(), 'uploads', 'images.png');
+        await page.getByRole('button', { name: 'Underwriter Logo' }).setInputFiles(filePath);
+        //await page.getByRole('button', { name: 'Underwriter Logo' }).setInputFiles('C:\\Users\\meet.joshi\\Anova Project\\uploads\\images.png');
         await page.getByRole('combobox', { name: 'Select Country' }).click();
         await page.getByRole('searchbox', { name: 'Search' }).fill('UNite');
         await page.getByRole('option', { name: 'United States', exact: true }).click();
