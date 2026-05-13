@@ -152,11 +152,11 @@ jobs:
           server_address: smtp.mailersend.net
           server_port: 2525
           secure: false
-          username: MS_Uhcn7i@test-ywj2lpnyzk1g7oqz.mlsender.net
-          password: mssp.Qsl5g8S.zr6ke4npn53gon12.ADMnmZy
+          username: MS_H24YF9@test-86org8emz50gew13.mlsender.net
+          password: mssp.L66Tltr.z86org8vov0lew13.AhI2UJr
           subject: "✅ Playwright Tests Passed"
           to: meet.joshi@pulsesolutions.net
-          from: MS_Uhcn7i@test-ywj2lpnyzk1g7oqz.mlsender.net
+          from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
           body: |
             ✅ All test cases passed successfully.
 
@@ -176,12 +176,12 @@ jobs:
           server_address: smtp.mailersend.net
           server_port: 2525
           secure: false
-          username: MS_Uhcn7i@test-ywj2lpnyzk1g7oqz.mlsender.net
-          password: mssp.Qsl5g8S.zr6ke4npn53gon12.ADMnmZy
+          username: MS_H24YF9@test-86org8emz50gew13.mlsender.net
+          password: mssp.L66Tltr.z86org8vov0lew13.AhI2UJr
           subject: "❌ Playwright Tests Failed"
           to: meet.joshi@pulsesolutions.net
-          cc: ghanshyam.lakhani@pulsesolutions.net
-          from: MS_Uhcn7i@test-ywj2lpnyzk1g7oqz.mlsender.net
+          cc: ankita.mahadik@pulsesolutions.net
+          from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
           body: |
             ❌ Some test cases failed.
 

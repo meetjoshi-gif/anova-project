@@ -18,9 +18,9 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html', { outputFolder: 'reports', open: 'never' }],
@@ -33,13 +33,13 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || 'https://newdev.anovamarine.com',
 
     /* Collect trace only when retrying a failed test. */
-    trace: 'on',
+    trace: 'on-first-retry',
 
     /* Take screenshot only on failure */
     screenshot: 'only-on-failure',
 
     /* Record video on failure */
-    video: 'on',
+    video: 'on-first-retry',
     
   },
 
