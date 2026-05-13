@@ -1,0 +1,4 @@
+{
+  "mcp.serverUri": "http://localhost:3000",
+  "mcp.workspaceFolder": "${workspaceFolder}"
+}

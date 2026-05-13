@@ -1,0 +1,13 @@
+{
+  "name": "anova-playwright-mcp",
+  "version": "1.0.0",
+  "description": "Local MCP manifest for Anova Playwright project",
+  "protocolVersion": "1.0",
+  "entryPoint": "./server.js",
+  "workspaceFolders": ["./"],
+  "capabilities": {
+    "code": true,
+    "tests": true,
+    "diagnostics": true
+  }
+}
