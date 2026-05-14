@@ -147,6 +147,8 @@ export class ClientsPage {
     await this.inputMC.fill(mc);
     await this.inputDOT.fill(dot);
     await this.inputTaxId.fill(taxId);
+    await this.page.getByRole('combobox', { name: 'Active' }).click();
+    await this.page.getByRole('option', { name: 'Inactive' }).click();
     await this.buttonSaveClient.click();
     await this.buttonOkay.click();
   }
@@ -163,7 +165,8 @@ export class ClientsPage {
     await this.comboboxState.click();
     await this.page.getByRole('searchbox', { name: 'Search' }).fill('New');
     await this.page.getByRole('option', { name: 'New York' }).click();
-
+    await this.page.getByRole('combobox', { name: 'Active' }).click();
+    await this.page.getByRole('option', { name: 'All' }).click();
     await this.buttonApply.click({ timeout: 50000 });
   }
 
@@ -172,20 +175,20 @@ export class ClientsPage {
     await this.buttonReset.click();
   }
 
-//   async configureColumns(): Promise<void> {
-//     await this.buttonColumnsSetting.click();
-//     await this.checkboxAddress.uncheck();
-//     await this.checkboxBalanceDue.uncheck();
-//     await this.checkboxStatus.uncheck();
-//     await this.buttonApply.click();
-//     await this.buttonOK.click();
-//   }
+  //   async configureColumns(): Promise<void> {
+  //     await this.buttonColumnsSetting.click();
+  //     await this.checkboxAddress.uncheck();
+  //     await this.checkboxBalanceDue.uncheck();
+  //     await this.checkboxStatus.uncheck();
+  //     await this.buttonApply.click();
+  //     await this.buttonOK.click();
+  //   }
 
-//   async resetColumns(): Promise<void> {
-//     await this.buttonColumnsSetting.click();
-//     await this.buttonReset.click();
-//     await this.buttonOK.click();
-//   }
+  //   async resetColumns(): Promise<void> {
+  //     await this.buttonColumnsSetting.click();
+  //     await this.buttonReset.click();
+  //     await this.buttonOK.click();
+  //   }
 
   async exportClients(): Promise<void> {
     const downloadPromise = this.page.waitForEvent('download');

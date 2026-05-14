@@ -75,6 +75,8 @@ test.describe.serial('Underwriter Flow', () => {
         await page.getByRole('textbox', { name: 'AI Liability Cost' }).fill('10');
         await page.getByRole('textbox', { name: 'AI Liability Fee AI Liability' }).fill('10');
         await page.getByRole('textbox', { name: 'AI Liability Minimum Fee' }).fill('10');
+        await page.getByRole('combobox', { name: 'Active' }).first().click();
+        await page.getByRole('option', { name: 'Inactive' }).click();
 
         await page.getByRole('button', { name: 'Save Underwriter' }).click();
         await page.getByRole('button', { name: 'Okay' }).click();
@@ -91,9 +93,12 @@ test.describe.serial('Underwriter Flow', () => {
         await page.getByRole('combobox', { name: 'Select State' }).click();
         await page.getByRole('searchbox', { name: 'Search' }).fill('New');
         await page.getByRole('option', { name: 'New York' }).click();
+        await page.getByRole('combobox', { name: 'Active' }).click();
+        await page.getByRole('option', { name: 'All' }).click();
         await page.getByRole('button', { name: 'Apply' }).click();
+        await page.reload();
         await page.getByText('Filter', { exact: true }).click();
-        await page.getByRole('link', { name: 'Reset' }).click();
+        await page.getByRole('link', { name: 'Reset' }).click({timeout: 5000});
         // Collumn 1: Filter applied and reset successfully
         await page.getByText('Columns Setting').click();
         await page.getByRole('checkbox', { name: 'Contact Name' }).uncheck();

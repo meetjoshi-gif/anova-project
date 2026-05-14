@@ -26,10 +26,10 @@ test.describe.serial('Insurer Module', () => {
     await browserContext.close();
   });
 
-  test('Insurers Creation', async () => {
+  test('Test 1 - Insurers Creation', async () => {
 
     await page.getByRole('link', { name: ' Users' }).click({ timeout: 5000 });
-        await page.goto('https://newdev.anovamarine.com/revised/admin/users_insurers');
+    await page.goto('https://newdev.anovamarine.com/revised/admin/users_insurers');
 
     // await page.getByRole('link', { name: 'Insurers' }).click();
     await page.getByRole('link', { name: 'Add New Insurer' }).click();
@@ -72,7 +72,7 @@ test.describe.serial('Insurer Module', () => {
     await page.getByRole('button', { name: 'Okay' }).click();
   });
 
-  test('Search Insurer', async () => {
+  test('Test 2 - Search Insurer', async () => {
 
     await page.getByRole('textbox', { name: 'Search by Company Name or' }).fill(insurerName);
 
@@ -81,12 +81,14 @@ test.describe.serial('Insurer Module', () => {
     await expect(page.locator('body')).toContainText(insurerName);
   });
 
-  test('Edit Insurer', async () => {
+  test('Test 3 - Edit Insurer', async () => {
     await page.getByRole('link', { name: insurerName }).click();
     await page.getByRole('textbox', { name: 'Website URL' }).fill('https://google.com');
     phoneNumber = `9${Math.floor(100000000 + Math.random() * 900000000)}`;
-    await page.getByRole('textbox', { name: 'Phone' })
-      .fill(phoneNumber); await page.getByRole('textbox', { name: 'New Note' }).fill('Update the Note For Underwriter');
+    await page.getByRole('textbox', { name: 'Phone' }).fill(phoneNumber);
+    await page.getByRole('combobox', { name: 'Active' }).click();
+    await page.getByRole('option', { name: 'Inactive' }).click();
+    await page.getByRole('textbox', { name: 'New Note' }).fill('Update the Note For Underwriter');
     await page.getByRole('button', { name: 'Post Note' }).click();
     await page.getByRole('button', { name: 'Yes' }).click();
     await page.getByRole('button', { name: 'OK' }).click();
@@ -95,7 +97,7 @@ test.describe.serial('Insurer Module', () => {
   })
 
 
-  test('Filter Insurer', async () => {
+  test('Test 4 - Filter Insurer', async () => {
     await page.getByText('Filter', { exact: true }).click();
     await page.getByRole('combobox', { name: 'Select Country' }).click();
     await page.getByRole('searchbox', { name: 'Search' }).fill('United');
@@ -127,7 +129,7 @@ test.describe.serial('Insurer Module', () => {
     await page.getByRole('button', { name: 'OK' }).click();
   })
 
-  test('Export Insurers', async () => {
+  test('Test 5 - Export Insurers', async () => {
     const downloadPromise = page.waitForEvent('download');
     await page.getByRole('link', { name: 'Export as XLS' }).click();
     const download = await downloadPromise;

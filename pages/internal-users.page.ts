@@ -133,6 +133,8 @@ export class InternalUsersPage {
     await this.openEditForm();
     await this.updateUserName(newName);
     await this.updateUserPhone(newPhone);
+    await this.page.getByRole('combobox', { name: 'Active' }).click();
+    await this.page.getByRole('option', { name: 'Inactive' }).click();
     await this.buttonSave.click();
     await this.buttonOkay.click();
     console.log(`✅ Internal user updated: ${newName}`);

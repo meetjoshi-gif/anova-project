@@ -69,7 +69,7 @@ test.describe('Clients User Management', () => {
 
     await clientsPage.editClient(createdCompany, dba, mc, dot, taxId);
 
-    console.log('✅ Client edited successfully');
+    console.log('✅ Client edited successfully with inactive status');
   });
 
   test('Test 4 - Filter and Column', async () => {

@@ -65,6 +65,7 @@ test.describe.serial('Broker Flow', () => {
     await page.getByRole('searchbox', { name: 'Search' }).fill('New');
     await page.getByRole('option', { name: 'New York' }).click();
     await page.getByRole('textbox', { name: 'Postal Code' }).fill('10010');
+
     const underwriters = ['AIG', 'TT Club'];
 
     const randomUnderwriter =
@@ -92,16 +93,21 @@ test.describe.serial('Broker Flow', () => {
     await page.getByRole('checkbox', { name: 'Bond' }).check();
     await page.locator('#product_7').check();
     await page.getByRole('textbox', { name: 'Tax ID or EIN' }).fill(`TAX${Date.now()}`);
+    await page.getByRole('combobox', { name: 'Active' }).click();
+    await page.getByRole('option', { name: 'Inactive' }).click();
     await page.getByRole('button', { name: 'Save Broker' }).click();
     await page.getByRole('button', { name: 'Okay' }).click();
     console.log('Broker edited successfully with Company Name:', companyName);
   });
 
   test('Test 4 - Filter the Broker', async () => {
+    await page.reload();
     await page.getByText('Filter', { exact: true }).click();
     await page.getByRole('combobox', { name: 'Select Country' }).click();
     await page.getByRole('searchbox', { name: 'Search' }).fill('United');
     await page.getByRole('option', { name: 'United States', exact: true }).click();
+    await page.getByRole('combobox', { name: 'Active' }).click();
+    await page.getByRole('option', { name: 'Inactive' }).click();
     const options = ['Anova', 'Logistiq'];
     const randomOption = options[Math.floor(Math.random() * options.length)];
 

@@ -69,7 +69,8 @@ test.describe('Internal User Management', () => {
     const updatedPhone = `9${Math.floor(100000000 + Math.random() * 900000000)}`;
 
     await internalUsersPage.editInternalUser(updatedName, updatedPhone);
-    console.log('✅ Internal user edited successfully');
+    // Status changed from Active to Inactive in the editInternalUser method
+    console.log('✅ Internal user edited successfully with status change to Inactive');
   });
 
   test('Test 4 - Filter Internal Users', async () => {
