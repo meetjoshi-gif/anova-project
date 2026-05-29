@@ -36,7 +36,7 @@ test.describe.serial('Claims module', () => {
         await page.reload();
         await page.getByRole('checkbox', { name: 'Not related to a certificate' }).check();
 
-    
+
 
         // Anova Claim Handler
         await page.getByRole('combobox', { name: 'Select Claim Handler' }).click();
@@ -55,7 +55,7 @@ test.describe.serial('Claims module', () => {
         await page.getByRole('option', { name: 'AIG', exact: true }).click();
 
 
-        const coveredOperations = [
+        const operations = [
             'International Freight',
             'NVOCC',
             'Charterer',
@@ -64,31 +64,17 @@ test.describe.serial('Claims module', () => {
             'Freight/Property Broker'
         ];
 
-        // Pick random option safely
         const randomOperation =
-            coveredOperations[Math.floor(Math.random() * coveredOperations.length)];
+            operations[Math.floor(Math.random() * operations.length)];
 
-        // Open dropdown
-        const dropdown = page.getByRole('combobox', {
+        await page.getByRole('combobox', {
             name: 'Select Covered Operation'
-        });
+        }).click();
 
-        await dropdown.waitFor({ state: 'visible' });
-        await dropdown.click();
-
-        // Wait for options visible
-        const option = page.getByRole('option', {
+        await page.getByRole('option', {
             name: randomOperation,
             exact: true
-        });
-
-        await option.waitFor({ state: 'visible' });
-
-        // Scroll if needed
-        await option.scrollIntoViewIfNeeded();
-
-        // Click safely
-        await option.click({ force: true });
+        }).click();
 
         console.log(`Selected Covered Operation: ${randomOperation}`);
 

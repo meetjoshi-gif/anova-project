@@ -63,13 +63,13 @@ test('Test 1 - WTI Claim Module Created', async ({ page }) => {
   await page.getByRole('button', { name: 'Next' }).click();
   console.log('Step 1 completed: Your Details');
   await page.waitForTimeout(2000);
-
+  //Step 2
   await page.getByRole('checkbox', { name: 'Same as Your Address' }).check();
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Next' }).click();
 
   console.log('Step 2 completed: Cargo Location');
-
+  //Step 3
   await page.getByRole('textbox', { name: 'Description of Claim*' }).fill('Claim Description');
   await page.waitForTimeout(2000);
   const date = new Date();
@@ -105,8 +105,9 @@ test('Test 1 - WTI Claim Module Created', async ({ page }) => {
 
   await page.getByRole('textbox', { name: 'Additional Comments*' }).fill('Additonal Comment Not Needed');
   await page.getByRole('button', { name: 'Next' }).click();
-
   console.log('Step 3 completed: Claim Details');
+  //Step 4
+
   await page.waitForTimeout(2000);
   await page.locator('#st_catgeory_0').click();
   await page.locator('#st_catgeory_0').fill('Test');
@@ -126,8 +127,8 @@ test('Test 1 - WTI Claim Module Created', async ({ page }) => {
   await page.locator('#fl_amount_claim_0').fill('10');
   await page.getByRole('button', { name: 'Next' }).click();
   console.log('Step 4 completed: Claim Items Description');
-
-  await page.waitForTimeout(2000);
+  //Step 5
+  await page.waitForTimeout(5000);
   const filePath = path.join(process.cwd(), 'uploads', 'Claimupload.pdf');
   await page.getByRole('button', { name: 'Attachment Choose files' }).setInputFiles(filePath);
 
@@ -135,126 +136,126 @@ test('Test 1 - WTI Claim Module Created', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Custom File Name' }).fill('Uploaded File', { timeout: 5000 });
   await page.getByRole('combobox').selectOption('1');
   await page.getByRole('button', { name: 'Finish' }).click();
-    await page.waitForTimeout(5000);
+  await page.waitForTimeout(5000);
   console.log('Step 5 completed: Supporting Documents and Claim Submission');
-await expect(page).toHaveURL(/.*\/wti_claim\/thankyou\/.*\?lang=en/);
-
+  await expect(page).toHaveURL(/.*\/storage_claim_or_cargo\/thankyou\/.*\?lang=en/);
   // console.log({firstName,lastName,email});
 
 });
 
 test.describe.serial('Claims module WTI', () => {
 
-    // Before All
-    test.beforeAll(async ({ browser }) => {
+  // Before All
+  test.beforeAll(async ({ browser }) => {
 
-        context = await browser.newContext();
-        page = await context.newPage();
+    context = await browser.newContext();
+    page = await context.newPage();
 
-        await page.goto('https://newdev.anovamarine.com/revised/login/index');
+    await page.goto('https://newdev.anovamarine.com/revised/login/index');
 
-        await page.getByRole('textbox', { name: 'Email' }).fill('keri.anderson97+admin@gmail.com');
+    await page.getByRole('textbox', { name: 'Email' }).fill('keri.anderson97+admin@gmail.com');
 
-        await page.getByRole('textbox', { name: 'Password' }).fill('123456');
+    await page.getByRole('textbox', { name: 'Password' }).fill('123456');
 
-        await page.getByRole('button', { name: 'Log In' }).click();
-        await page.waitForTimeout(2000);
-        console.log('Login Successful');
-    });
-test('Test 2 - WTI Claims reject and Accept', async () => {
-  ;
-  await page.goto('https://newdev.anovamarine.com/revised/admin/claims/wti_requests');
-  const actions = ['Reject', 'Assign & Accept'];
+    await page.getByRole('button', { name: 'Log In' }).click();
+    await page.waitForTimeout(2000);
+    console.log('Login Successful');
+  });
+  test('Test 2 - WTI Claims reject and Accept', async () => {
+    ;
+    await page.goto('https://newdev.anovamarine.com/revised/admin/claims/wti_requests');
+    const actions = ['Reject', 'Assign & Accept'];
 
-  const randomAction =
-    actions[Math.floor(Math.random() * actions.length)];
+    const randomAction =
+      actions[Math.floor(Math.random() * actions.length)];
 
-  await page.locator('.btn.btn-sm.btn-icon')
-    .first()
-    .click();
-  await page.waitForTimeout(2000);
-  await page.getByRole('link', {
-    name: randomAction
-  }).click();
+    await page.locator('.btn.btn-sm.btn-icon')
+      .first()
+      .click();
+    await page.waitForTimeout(2000);
+    await page.getByRole('link', {
+      name: randomAction
+    }).click();
 
-  if (randomAction === 'Reject') {
+    if (randomAction === 'Reject') {
+
+      await page.getByRole('button', {
+        name: 'Yes'
+      }).click();
+
+    } else {
+
+      await page.getByRole('combobox', {
+        name: 'Select Claim Handler'
+      }).click();
+
+      await page.getByRole('option', {
+        name: 'Angel Mederos'
+      }).click();
+
+      await page.getByRole('combobox', {
+        name: 'Select WTI Moving Company'
+      }).click();
+
+      await page.getByRole('option', {
+        name: 'Transportation Services'
+      }).click();
+
+      await page.getByRole('combobox', {
+        name: 'Select Policy'
+      }).click();
+
+      await page.locator(
+        'li.select2-results__option--selectable'
+      ).filter({
+        hasText: /OCMR-\d+-\d+/
+      }).first().click();
+
+      await page.getByRole('button', {
+        name: 'Assign & Accept'
+      }).click();
+    }
 
     await page.getByRole('button', {
-      name: 'Yes'
+      name: 'Okay'
     }).click();
 
-  } else {
-
-    await page.getByRole('combobox', {
-      name: 'Select Claim Handler'
-    }).click();
-
-    await page.getByRole('option', {
-      name: 'Angel Mederos'
-    }).click();
-
-    await page.getByRole('combobox', {
-      name: 'Select WTI Moving Company'
-    }).click();
-
-    await page.getByRole('option', {
-      name: 'Transportation Services'
-    }).click();
-
-    await page.getByRole('combobox', {
-      name: 'Select Policy'
-    }).click();
-
-    await page.locator(
-      'li.select2-results__option--selectable'
-    ).filter({
-      hasText: /OCMR-\d+-\d+/
-    }).first().click();
-
-    await page.getByRole('button', {
-      name: 'Assign & Accept'
-    }).click();
-  }
-
-  await page.getByRole('button', {
-    name: 'Okay'
-  }).click();
-
-  console.log(`Executed Action: ${randomAction}`);
-})
-test('Test 3 - WTI Claims Search', async () => {
+    console.log(`Executed Action: ${randomAction}`);
+  })
+  test('Test 3 - WTI Claims Search', async () => {
+    await page.reload();
     await page.getByRole('textbox', { name: 'Search by Request #, Name,' }).fill(email);
-  await page.getByRole('button').filter({ hasText: /^$/ }).click();
-  console.log('Searched for WTI Claim with Email:', email);
-})
+    await page.getByRole('button').filter({ hasText: /^$/ }).click();
+    console.log('Searched for WTI Claim with Email:', email);
+  })
 
-test('Test 4 - WTI Claims Filter', async () => {
+  test('Test 4 - WTI Claims Filter', async () => {
     await page.reload();
     await page.getByText('Filter', { exact: true }).click();
     const statusOptions = ['Accepted', 'Rejected'];
 
-const randomStatus =
-  statusOptions[Math.floor(Math.random() * statusOptions.length)];
+    const randomStatus =
+      statusOptions[Math.floor(Math.random() * statusOptions.length)];
 
-await page.getByRole('combobox', {
-  name: 'Pending'
-}).click();
+    await page.getByRole('combobox', {
+      name: 'Pending'
+    }).click();
 
-await page.getByRole('option', {
-  name: randomStatus
-}).click();
+    await page.getByRole('option', {
+      name: randomStatus
+    }).click();
 
-console.log(`Selected Status: ${randomStatus}`);
-  await page.getByRole('button', { name: 'Apply' }).click();
+    console.log(`Selected Status: ${randomStatus}`);
+    await page.getByRole('button', { name: 'Apply' }).click();
     await page.reload();
     await page.getByText('Filter', { exact: true }).click();
     await page.getByRole('link', { name: 'Reset' }).click();
     console.log('Filter applied and reset successfully');
 
 
-})
-test.afterAll(async () => {
+  })
+  test.afterAll(async () => {
     await context.close();
     console.log('Browser Closed Successfully');
-})
+  })
 })
