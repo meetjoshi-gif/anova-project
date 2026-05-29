@@ -27,8 +27,7 @@ test.describe.serial('Underwriter Flow', () => {
     });
 
     test('Test 1 - Underwriter Creation', async () => {
-        await page.getByRole('link', { name: ' Users' }).click();
-        await page.getByRole('link', { name: 'Underwriters' }).click();
+        await page.goto('https://newdev.anovamarine.com/revised/admin/users_underwriters');
         await page.getByRole('link', { name: 'Add New Underwriter' }).click();
         companyName = `Underwriter_${Date.now()}`;
         const phone = `9${Math.floor(100000000 + Math.random() * 900000000)}`;
@@ -98,15 +97,20 @@ test.describe.serial('Underwriter Flow', () => {
         await page.getByRole('button', { name: 'Apply' }).click();
         await page.reload();
         await page.getByText('Filter', { exact: true }).click();
-        await page.getByRole('link', { name: 'Reset' }).click({timeout: 5000});
+        await page.getByRole('link', { name: 'Reset' }).click({ timeout: 5000 });
         // Collumn 1: Filter applied and reset successfully
+        await page.reload();
+
         await page.getByText('Columns Setting').click();
         await page.getByRole('checkbox', { name: 'Contact Name' }).uncheck();
         await page.getByRole('checkbox', { name: 'Email' }).uncheck();
         await page.getByRole('checkbox', { name: 'Phone' }).uncheck();
         await page.getByRole('button', { name: 'Apply' }).click();
         await page.getByRole('button', { name: 'OK' }).click();
+        await page.reload();
+
         await page.getByText('Columns Setting').click();
+
         await page.getByRole('button', { name: 'Reset' }).click();
         await page.getByRole('button', { name: 'OK' }).click();
         console.log('Filter applied and reset successfully');

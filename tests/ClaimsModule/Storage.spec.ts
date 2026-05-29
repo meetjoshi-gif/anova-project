@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Browser, BrowserContext, Page } from '@playwright/test';
 import path from 'path/win32';
 
 let currentDate;
@@ -6,8 +6,10 @@ let currentYear;
 let currentMonth;
 let currentDay;
 let monthName;
+let context: BrowserContext;
+let page: Page;
 
-test('Storage-Claim', async ({ page }) => {
+test('FrontEnd Storage-Claim', async ({ page }) => {
   await page.goto('https://newdev.anovamarine.com/revised/storage_claim_or_cargo');
 
   //Cargo Claims
@@ -125,7 +127,7 @@ test('Storage-Claim', async ({ page }) => {
 
 });
 
-test('Self Storage Claim', async ({ page }) => {
+test('FrontEnd Self Storage Claim', async ({ page }) => {
   await page.goto('https://newdev.anovamarine.com/revised/storage_claim_or_cargo');
   await page.getByLabel('Type of Claim*').selectOption('0');
   await page.waitForTimeout(2000);
@@ -139,6 +141,8 @@ test('Self Storage Claim', async ({ page }) => {
   console.log('Step 1 completed: Claim Type');
 
   //Step 2
+  await page.waitForTimeout(2000);
+
   const randomNumber = Math.floor(Math.random() * 10000);
 
   const tenantName = `Tenant${randomNumber}`;
@@ -207,7 +211,7 @@ test('Self Storage Claim', async ({ page }) => {
   const filePath4 = path.join(process.cwd(), 'uploads', 'Claimupload.pdf');
   await page.locator('input[name="st_file_4"]').setInputFiles(filePath4);
   console.log('facility uploaded successfully');
-
+  await page.waitForTimeout(2000);
   await page.getByRole('textbox', { name: 'Typed Full Name*' }).fill('TEST');
   await page.locator('canvas').click({
     position: {
@@ -218,5 +222,51 @@ test('Self Storage Claim', async ({ page }) => {
   await page.getByRole('checkbox', { name: 'I certify that the' }).check();
   await page.getByRole('button', { name: 'Finish' }).click();
   console.log('Self Storage Claim submitted successfully with multiple file attachments and signature.');
-
 })
+
+test.describe.serial('Storage and Cargo', () => {
+
+  // Before All
+  test.beforeAll(async ({ browser }) => {
+
+    context = await browser.newContext();
+    page = await context.newPage();
+
+    await page.goto('https://newdev.anovamarine.com/revised/login/index');
+
+    await page.getByRole('textbox', { name: 'Email' }).fill('keri.anderson97+admin@gmail.com');
+
+    await page.getByRole('textbox', { name: 'Password' }).fill('123456');
+
+    await page.getByRole('button', { name: 'Log In' }).click();
+    await page.waitForTimeout(2000);
+    console.log('Login Successful');
+  });  
+  test('should allow assigning and rejecting claims', async () => {
+  await page.waitForTimeout(2000);
+  await page.goto('https://newdev.anovamarine.com/revised/admin/storage_or_cargo_claim_request');
+  const randomAction = Math.random() < 0.5 ? 'assign' : 'reject';
+
+  await page.locator('.btn.btn-sm.btn-icon').first().click();
+
+  if (randomAction === 'assign') {
+    await page.getByRole('link', { name: 'Assign & Accept' }).click();
+
+    await page.getByRole('combobox', { name: 'Select Claim Handler' }).click();
+    await page.getByRole('option', { name: 'Angel Mederos' }).click();
+
+    await page.getByRole('button', { name: 'Assign & Accept' }).click();
+    await page.getByRole('button', { name: 'Okay' }).click();
+
+    console.log('Claim Assigned & Accepted');
+  } else {
+    await page.getByRole('link', { name: 'Reject' }).click();
+
+    await page.getByRole('button', { name: 'Yes' }).click();
+    await page.getByRole('button', { name: 'Okay' }).click();
+
+    console.log('Claim Rejected');
+  }
+  })
+
+});
