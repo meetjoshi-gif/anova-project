@@ -241,32 +241,38 @@ test.describe.serial('Storage and Cargo', () => {
     await page.getByRole('button', { name: 'Log In' }).click();
     await page.waitForTimeout(2000);
     console.log('Login Successful');
-  });  
+  });
   test('should allow assigning and rejecting claims', async () => {
-  await page.waitForTimeout(2000);
-  await page.goto('https://newdev.anovamarine.com/revised/admin/storage_or_cargo_claim_request');
-  const randomAction = Math.random() < 0.5 ? 'assign' : 'reject';
+    await page.waitForTimeout(2000);
+    await page.goto('https://newdev.anovamarine.com/revised/admin/storage_or_cargo_claim_request');
+    const randomAction = Math.random() < 0.5 ? 'assign' : 'reject';
 
-  await page.locator('.btn.btn-sm.btn-icon').first().click();
+    await page.locator('.btn.btn-sm.btn-icon').first().click();
 
-  if (randomAction === 'assign') {
-    await page.getByRole('link', { name: 'Assign & Accept' }).click();
+    if (randomAction === 'assign') {
+      await page.getByRole('link', { name: 'Assign & Accept' }).click();
 
-    await page.getByRole('combobox', { name: 'Select Claim Handler' }).click();
-    await page.getByRole('option', { name: 'Angel Mederos' }).click();
+      await page.getByRole('combobox', { name: 'Select Claim Handler' }).click();
+      await page.getByRole('option', { name: 'Angel Mederos' }).click();
 
-    await page.getByRole('button', { name: 'Assign & Accept' }).click();
-    await page.getByRole('button', { name: 'Okay' }).click();
+      await page.getByRole('button', { name: 'Assign & Accept' }).click();
+      await page.getByRole('button', { name: 'Okay' }).click();
 
-    console.log('Claim Assigned & Accepted');
-  } else {
-    await page.getByRole('link', { name: 'Reject' }).click();
+      console.log('Claim Assigned & Accepted');
+    } else {
+      await page.getByRole('link', { name: 'Reject' }).click();
 
-    await page.getByRole('button', { name: 'Yes' }).click();
-    await page.getByRole('button', { name: 'Okay' }).click();
+      await page.getByRole('button', { name: 'Yes' }).click();
+      await page.getByRole('button', { name: 'Okay' }).click();
 
-    console.log('Claim Rejected');
-  }
+      console.log('Claim Rejected');
+    }
+    test('Test 2 - Storage/Cargo Download', async () => {
+      await page.reload();
+      await page.locator('.btn.btn-sm.btn-icon').first().click();
+      const downloadPromise = page.waitForEvent('download');
+      await page.getByRole('link', { name: 'Download' }).click();
+      const download = await downloadPromise;
+    });
   })
-
-});
+})
