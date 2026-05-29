@@ -30,8 +30,8 @@ test.describe.serial('Leads Flow ', () => {
 
     test('Test 1 - Leads Creation', async () => {
 
-        await page.getByRole('link', { name: ' Users' }).click();
         await page.goto('https://newdev.anovamarine.com/revised/admin/users_leads');
+        await page.reload();
         await page.getByRole('link', { name: 'Leads' }).click();
         await page.getByRole('link', { name: 'Add New Lead' }).click();
 

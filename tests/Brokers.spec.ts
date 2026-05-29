@@ -115,6 +115,8 @@ test.describe.serial('Broker Flow', () => {
     await page.getByRole('option', { name: randomOption }).click();
 
     await page.getByRole('button', { name: 'Apply' }).click();
+    await page.reload();
+
     await page.getByText('Filter', { exact: true }).click();
     await page.getByRole('link', { name: 'Reset' }).click();
     console.log('Filter applied and reset successfully');

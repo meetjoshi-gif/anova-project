@@ -222,7 +222,7 @@ test.describe.serial('Claims module WTI', () => {
   })
   test('Test 3 - WTI Claims Search', async () => {
     await page.reload();
-    await page.getByRole('textbox', { name: 'Search by Request #, Name,' }).fill(email);
+    await page.locator('#search_field').fill(email);
     await page.locator('button.enter-cert-search_bt').click();
     console.log('Searched for WTI Claim with Email:', email);
   })
