@@ -136,7 +136,7 @@ test('Test 1 - WTI Claim Module Created', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Custom File Name' }).fill('Uploaded File', { timeout: 5000 });
   await page.getByRole('combobox').selectOption('1');
   await page.getByRole('button', { name: 'Finish' }).click();
-  await page.waitForTimeout(10000);
+  await page.waitForTimeout(5000);
   console.log('Step 5 completed: Supporting Documents and Claim Submission');
   // console.log({firstName,lastName,email});
 

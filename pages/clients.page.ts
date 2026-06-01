@@ -154,6 +154,8 @@ export class ClientsPage {
   }
 
   async applyFilter(): Promise<void> {
+        await this.page.reload();
+
     await this.buttonFilter.click();
 
     // Select country
@@ -168,6 +170,8 @@ export class ClientsPage {
     await this.page.getByRole('combobox', { name: 'Active' }).click();
     await this.page.getByRole('option', { name: 'All' }).click();
     await this.buttonApply.click({ timeout: 50000 });
+            await this.page.reload();
+
   }
 
   async resetFilter(): Promise<void> {

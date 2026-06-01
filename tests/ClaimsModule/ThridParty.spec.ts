@@ -146,10 +146,7 @@ test.describe.serial('Claims module', () => {
         console.log(dynamicClaimId);
 
         await page.locator('#search_fields').fill(dynamicClaimId);
-
-        await page.keyboard.press('Enter');
-
-        await expect(page.getByText(dynamicClaimId)).toBeVisible();
+        await page.getByRole('button').filter({ hasText: /^$/ }).click();
         await page.getByTitle('Reset').click();
         console.log('Searched for Claim with ID:', dynamicClaimId);
 

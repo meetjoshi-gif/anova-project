@@ -242,7 +242,7 @@ test.describe.serial('Storage and Cargo', () => {
     await page.waitForTimeout(2000);
     console.log('Login Successful');
   });
-  test('should allow assigning and rejecting claims', async () => {
+  test('Allow assigning and rejecting claims', async () => {
     await page.waitForTimeout(2000);
     await page.goto('https://newdev.anovamarine.com/revised/admin/storage_or_cargo_claim_request');
     const randomAction = Math.random() < 0.5 ? 'assign' : 'reject';

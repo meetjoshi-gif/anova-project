@@ -28,8 +28,9 @@ test.describe.serial('Broker Flow', () => {
 
 
   test('Test 1 - Broker Creation', async () => {
-    await page.getByRole('link', { name: ' Users' }).click();
-    await page.getByRole('link', { name: 'Brokers' }).click();
+    await page.reload();
+    await page.goto('https://newdev.anovamarine.com/revised/admin/users_brokers');
+    await page.reload();
     await page.getByRole('link', { name: 'Add New Broker' }).click();
     const options = ['Anova', 'Logistiq', 'Both'];
 

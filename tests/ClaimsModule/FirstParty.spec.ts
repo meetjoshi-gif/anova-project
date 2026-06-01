@@ -30,7 +30,7 @@ test.describe.serial('Claims module', () => {
     await page.getByRole('link', { name: ' Claims' }).click();
     await page.goto('https://newdev.anovamarine.com/revised/admin/claims/index?pending=1');
     await page.reload();
-    await page.getByRole('link', { name: 'Add New Claim' }).click();
+    await page.getByRole('link', { name: 'Add New Claim' }).click({timeout: 5000});
     await page.getByRole('radio', { name: 'First-Party (Marine Cargo/' }).check();
     await page.getByRole('button', { name: 'Continue' }).click();
     await page.reload();

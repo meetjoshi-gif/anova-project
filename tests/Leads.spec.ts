@@ -82,6 +82,7 @@ test.describe.serial('Leads Flow ', () => {
     })
 
     test('Test 4 - Filter and Column Settings', async () => {
+        await page.reload();
         await page.getByText('Filter', { exact: true }).click();
         await page.getByRole('combobox', { name: 'Select Country' }).click();
         await page.getByRole('searchbox', { name: 'Search' }).fill('Unite');
@@ -92,6 +93,7 @@ test.describe.serial('Leads Flow ', () => {
         await page.reload();
         await page.getByText('Filter', { exact: true }).click();
         await page.getByRole('link', { name: 'Reset' }).click();
+        await page.reload();
 
         await page.getByText('Columns Setting').click();
         await page.getByRole('checkbox', { name: 'Email' }).uncheck();
@@ -99,6 +101,7 @@ test.describe.serial('Leads Flow ', () => {
         await page.getByRole('checkbox', { name: 'Address' }).uncheck();
         await page.getByRole('button', { name: 'Apply' }).click();
         await page.getByRole('button', { name: 'OK' }).click();
+        await page.reload();
 
         await page.getByText('Columns Setting').click();
         await page.getByRole('button', { name: 'Reset' }).click();
