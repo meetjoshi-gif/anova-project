@@ -193,20 +193,24 @@ test('FrontEnd Self Storage Claim', async ({ page }) => {
 
   //Step 5
   await page.reload();
+    await page.waitForTimeout(2000);
   const filePath = path.join(process.cwd(), 'uploads', 'Claimupload.pdf');
   await page.locator('input[name="st_file_1"]').setInputFiles(filePath);
   console.log('Lease Agreement uploaded successfully');
 
+  await page.waitForTimeout(2000);
 
   const filePath2 = path.join(process.cwd(), 'uploads', 'Claimupload.pdf');
   await page.locator('input[name="st_file_2"]').setInputFiles(filePath2);
   console.log('Tenant Protecation Plan uploaded successfully');
+  await page.waitForTimeout(2000);
 
   const filePath3 = path.join(process.cwd(), 'uploads', 'images.png');
   await page.locator('input[name="st_file_3"]').setInputFiles(filePath3);
   await page.waitForTimeout(2000);
   await page.getByRole('textbox', { name: 'e.g., water damage to sofa' }).fill('Test Pic');
   console.log('Pic uploaded successfully');
+  await page.waitForTimeout(2000);
 
   const filePath4 = path.join(process.cwd(), 'uploads', 'Claimupload.pdf');
   await page.locator('input[name="st_file_4"]').setInputFiles(filePath4);

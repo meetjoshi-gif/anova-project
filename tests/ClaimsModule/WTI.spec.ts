@@ -157,11 +157,13 @@ test.describe.serial('Claims module WTI', () => {
     await page.getByRole('textbox', { name: 'Password' }).fill('123456');
 
     await page.getByRole('button', { name: 'Log In' }).click();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(5000);
     console.log('Login Successful');
   });
+
   test('Test 2 - WTI Claims reject and Accept', async () => {
     await page.goto('https://newdev.anovamarine.com/revised/admin/claims/wti_requests');
+    await page.reload();
     const actions = ['Reject', 'Assign & Accept'];
 
     const randomAction =
@@ -219,13 +221,14 @@ test.describe.serial('Claims module WTI', () => {
     }).click();
 
     console.log(`Executed Action: ${randomAction}`);
-  })
-  test('Test 3 - WTI Claims Search', async () => {
     await page.reload();
-    await page.locator('#search_field').fill(email);
-    await page.locator('button.enter-cert-search_bt').click();
+    await page.getByRole('textbox', { name: 'Search by Request #, Name,' }).fill(email);
+    await page.getByRole('button').filter({ hasText: /^$/ }).click();
+    await page.getByTitle('Reset').click();
+
     console.log('Searched for WTI Claim with Email:', email);
   })
+
 
   test('Test 4 - WTI Claims Filter', async () => {
     await page.reload();
@@ -256,4 +259,4 @@ test.describe.serial('Claims module WTI', () => {
     await context.close();
     console.log('Browser Closed Successfully');
   })
-})
+}) 
