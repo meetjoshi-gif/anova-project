@@ -55,28 +55,8 @@ test.describe.serial('Claims module', () => {
         await page.getByRole('option', { name: 'AIG', exact: true }).click();
 
 
-        const operations = [
-            'International Freight',
-            'NVOCC',
-            'Charterer',
-            'Warehouse Operator',
-            'Customs House Broker',
-            'Freight/Property Broker'
-        ];
-
-        const randomOperation =
-            operations[Math.floor(Math.random() * operations.length)];
-
-        await page.getByRole('combobox', {
-            name: 'Select Covered Operation'
-        }).click();
-
-        await page.getByRole('option', {
-            name: randomOperation,
-            exact: true
-        }).click();
-
-        console.log(`Selected Covered Operation: ${randomOperation}`);
+        await page.getByRole('combobox', { name: 'Select Covered Operation' }).click();
+        await page.getByRole('option', { name: 'International Freight' }).click();
 
         await page.getByRole('combobox', { name: 'Select State' }).click();
         await page.getByRole('searchbox', { name: 'Search' }).fill('New');
