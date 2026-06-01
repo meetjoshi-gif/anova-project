@@ -176,7 +176,6 @@ jobs:
           password: mssp.L66Tltr.z86org8vov0lew13.AhI2UJr
           subject: "❌ Playwright Tests Failed"
           to: meet.joshi@pulsesolutions.net
-          cc: ankita.mahadik@pulsesolutions.net
           from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
           body: |
             ❌ Some test cases failed.

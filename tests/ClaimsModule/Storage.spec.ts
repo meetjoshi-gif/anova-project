@@ -267,7 +267,8 @@ test.describe.serial('Storage and Cargo', () => {
 
       console.log('Claim Rejected');
     }
-    test('Test 2 - Storage/Cargo Download', async () => {
+  });
+  test('Test 2 - Storage/Cargo Download', async () => {
       await page.reload();
       await page.locator('.btn.btn-sm.btn-icon').first().click();
       const downloadPromise = page.waitForEvent('download');
@@ -275,4 +276,3 @@ test.describe.serial('Storage and Cargo', () => {
       const download = await downloadPromise;
     });
   })
-})
