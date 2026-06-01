@@ -4,7 +4,7 @@ import { InternalUsersPage } from '../pages/internal-users.page';
 
 test.describe('Internal User Management', () => {
   test.describe.configure({ mode: 'serial' });
-  
+
   let createdEmail: string;
   let sharedPage: any;
   let loginPage: LoginPage;
@@ -22,19 +22,13 @@ test.describe('Internal User Management', () => {
 
     // Login with admin credentials
     await loginPage.loginWithAdminCredentials();
-    
+
     // Store page for use in all tests
     sharedPage = page;
-    
+
     console.log('✅ Admin logged in successfully - Session ready for all tests');
   });
 
-  test.afterAll(async () => {
-    // Cleanup after all tests
-    if (sharedPage) {
-      await sharedPage.close();
-    }
-  });
 
   test('Test 1 - Create Internal Users', async () => {
     // No login needed - already logged in from beforeAll
@@ -88,5 +82,12 @@ test.describe('Internal User Management', () => {
     await internalUsersPage.exportAsXLS();
 
     console.log('✅ Export XLS functionality verified successfully');
+  });
+  
+  test.afterAll(async () => {
+    // Cleanup after all tests
+    if (sharedPage) {
+      await sharedPage.close();
+    }
   });
 });

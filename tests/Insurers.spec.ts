@@ -21,10 +21,6 @@ test.describe.serial('Insurer Module', () => {
     await page.getByRole('button', { name: 'Log In' }).click();
   });
 
-  test.afterAll(async () => {
-    await page.close();
-    await browserContext.close();
-  });
 
   test('Test 1 - Insurers Creation', async () => {
 
@@ -134,4 +130,9 @@ test.describe.serial('Insurer Module', () => {
     await page.getByRole('link', { name: 'Export as XLS' }).click();
     const download = await downloadPromise;
   })
+
+  test.afterAll(async () => {
+    await page.close();
+    await browserContext.close();
+  });
 });

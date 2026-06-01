@@ -29,13 +29,6 @@ test.describe('Clients User Management', () => {
     console.log('✅ Admin logged in successfully - Session ready for all tests');
   });
 
-  test.afterAll(async () => {
-    // Cleanup after all tests
-    if (sharedPage) {
-      await sharedPage.close();
-    }
-  });
-
   test('Test 1 - Create Client with Unique Name', async () => {
     // No login needed - already logged in from beforeAll
     await clientsPage.navigateToClients();
@@ -89,5 +82,12 @@ test.describe('Clients User Management', () => {
     await clientsPage.exportClients();
 
     console.log('✅ Export XLS functionality verified successfully');
+  });
+  
+  test.afterAll(async () => {
+    // Cleanup after all tests
+    if (sharedPage) {
+      await sharedPage.close();
+    }
   });
 });
