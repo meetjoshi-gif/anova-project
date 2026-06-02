@@ -37,6 +37,9 @@ jobs:
              npm ci
              npx playwright install
 
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli       
+
       - name: Run Playwright tests in headless mode
         run: |
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npx playwright test
@@ -71,6 +74,17 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./reports
 
+      - name: Deploy Report to Netlify
+        if: always()
+        run: |
+          netlify deploy \
+          --dir=reports \
+          --site=$NETLIFY_SITE_ID \
+          --auth=$NETLIFY_AUTH_TOKEN \
+          --prod
+        env:
+          NETLIFY_AUTH_TOKEN: nfp_kpAxsudkNMY3c8qkMbfBQSN2vScqkBLWbe86
+          NETLIFY_SITE_ID: 8f3ea6ff-e3d0-41bd-b8e6-2bce67fa4470    
      
 
       # ✅ Email PASS
@@ -93,6 +107,9 @@ jobs:
             ✅ All test cases passed successfully.
 
             📊 Summary:
+
+                📊 Playwright HTML Report:
+                https://playwright-report-demo.netlify.app
 
             📦 Download Full Report (Trace + Video + Screenshot):
 
@@ -120,6 +137,9 @@ jobs:
             ❌ Some test cases failed.
 
             📊 Summary:
+              
+              📊 Playwright HTML Report:
+                https://playwright-report-demo.netlify.app
 
             📦 Download Artifacts (Trace / Video / Screenshot):
 
