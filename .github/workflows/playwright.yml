@@ -5,14 +5,20 @@ on:
   push:
     branches:
       - main
+  
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
 
 jobs:
   run_tests:
     runs-on: ubuntu-latest
 
-    steps:
+
+    steps: 
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -21,20 +27,20 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-   
+
       - name: Cache Node.js modules
         uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-node-    
+
 
       - name: Install Dependencies
         run: |
-             npm ci
-             npx playwright install
- 
+          npm ci
+          npx playwright install
 
       - name: Run Playwright tests in headless mode
         run: |
@@ -42,110 +48,40 @@ jobs:
         env:
           CI: true
 
-      # ✅ Upload HTML Report
+      # Upload HTML Report Artifact
       - name: Upload Playwright Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: reports/
 
-      # ✅ Upload Traces, Videos, Screenshots
-      - name: Upload Test Results (Trace/Video/Screenshot)
+      # Upload Traces, Videos, Screenshots
+      - name: Upload Test Results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: test-results/
 
-      # ✅ Deploy HTML Report (Public)
-      - name: Deploy Report to GitHub Pages
+      # GitHub Pages Setup
+      - name: Setup Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v4
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./reports
-      
-      - name: Extract Test Summary
-        id: test_summary
+          path: reports/
+
+      - name: Deploy to GitHub Pages
         if: always()
-        run: |
-          node <<EOF
-          const fs = require('fs');
+        id: deployment
+        uses: actions/deploy-pages@v4
 
-          let passed = 0;
-          let failed = 0;
-          let failedTests = [];
-
-          try {
-            const data = JSON.parse(fs.readFileSync('test-results/results.json', 'utf-8'));
-
-            if (data.stats) {
-              passed = data.stats.passed || 0;
-              failed = data.stats.failed || 0;
-            } else {
-              function parseSuite(suite) {
-                if (suite.specs) {
-                  suite.specs.forEach(spec => {
-                    spec.tests.forEach(test => {
-                      if (test.results) {
-                        test.results.forEach(result => {
-                          if (result.status === 'passed') passed++;
-                          if (result.status === 'failed') {
-                            failed++;
-                            failedTests.push(spec.title);
-                          }
-                        });
-                      }
-                    });
-                  });
-                }
-                if (suite.suites) suite.suites.forEach(parseSuite);
-              }
-              if (data.suites) data.suites.forEach(parseSuite);
-            }
-
-            if (failed > 0 && failedTests.length === 0) {
-              function parseFailed(suite) {
-                if (suite.specs) {
-                  suite.specs.forEach(spec => {
-                    spec.tests.forEach(test => {
-                      if (test.results) {
-                        test.results.forEach(result => {
-                          if (result.status === 'failed') {
-                            failedTests.push(spec.title);
-                          }
-                        });
-                      }
-                    });
-                  });
-                }
-                if (suite.suites) suite.suites.forEach(parseFailed);
-              }
-              if (data.suites) data.suites.forEach(parseFailed);
-            }
-          } catch (e) {
-            console.log("Error reading results:", e);
-            passed = 0;
-            failed = 0;
-            failedTests = ['Error reading results'];
-          }
-
-          fs.writeFileSync('summary.txt', \`
-          PASSED=\${passed}
-          FAILED=\${failed}
-          FAILED_TESTS=\${failedTests.join(', ') || 'None'}
-          \`);
-          EOF
-
-          cat summary.txt
-
-          source summary.txt
-
-          echo "passed=$PASSED" >> $GITHUB_OUTPUT
-          echo "failed=$FAILED" >> $GITHUB_OUTPUT
-          echo "failed_tests=$FAILED_TESTS" >> $GITHUB_OUTPUT
-      
-      # ✅ Email PASS
-      - name: Send Email to Client (PASS)
+      # PASS Email
+      - name: Send Email (PASS)
         if: success()
         uses: dawidd6/action-send-mail@v4
         with:
@@ -159,14 +95,16 @@ jobs:
           cc: ankita.mahadik@pulsesolutions.net
           from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
           body: |
-            ✅ All test cases passed successfully.
+            ✅ All Playwright test cases passed successfully.
 
-            📦 Download Full Report (Trace + Video + Screenshot):
+            📊 Public Report:
+            ${{ steps.deployment.outputs.page_url }}
+
+            📦 GitHub Run:
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-      # ❌ Email FAIL (Detailed)
-
-      - name: Send Email to Developer (FAIL)
+      # FAIL Email
+      - name: Send Email (FAIL)
         if: failure()
         uses: dawidd6/action-send-mail@v4
         with:
@@ -179,20 +117,18 @@ jobs:
           to: meet.joshi@pulsesolutions.net
           from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
           body: |
-            ❌ Some test cases failed.
+            ❌ Some Playwright test cases failed.
 
-            📦 Download Artifacts (Trace / Video / Screenshot):
+            📊 Public Report:
+            ${{ steps.deployment.outputs.page_url }}
+
+            📦 GitHub Run:
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-            1. Download "test-results" artifact
+            📥 Download the "test-results" artifact for:
+            - Trace files
+            - Videos
+            - Screenshots
 
-            2. Extract files
-
-            3. Run: npx playwright show-trace trace.zip
-
-
-
-            🎥 Videos & 📸 Screenshots are inside the same artifact.
-            3. Run: npx playwright show-trace trace.zip
-
-            
+            To open a trace locally:
+            npx playwright show-trace trace.zip
