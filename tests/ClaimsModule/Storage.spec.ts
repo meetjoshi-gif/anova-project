@@ -215,11 +215,6 @@ test('FrontEnd Self Storage Claim', async ({ page }) => {
   await page.locator('input[name="st_file_4"]').setInputFiles(filePath4);
   console.log('facility uploaded successfully');
 
-  console.log('cwd:', process.cwd());
-  console.log('filePath:', filePath);
-  console.log('filePath:', filePath2);
-  console.log('filePath:', filePath3);
-  console.log('filePath:', filePath4);
   await page.waitForTimeout(2000);
   await page.getByRole('textbox', { name: 'Typed Full Name*' }).fill('TEST');
   await page.locator('canvas').click({
