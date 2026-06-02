@@ -109,7 +109,7 @@ jobs:
             📊 Summary:
 
                 📊 Playwright HTML Report:
-                https://playwright-report-demo.netlify.app
+                https://anova-html-report-ce92f9.netlify.app/
 
             📦 Download Full Report (Trace + Video + Screenshot):
 
@@ -137,9 +137,9 @@ jobs:
             ❌ Some test cases failed.
 
             📊 Summary:
-              
+
               📊 Playwright HTML Report:
-                https://playwright-report-demo.netlify.app
+                https://anova-html-report-ce92f9.netlify.app/
 
             📦 Download Artifacts (Trace / Video / Screenshot):
 
