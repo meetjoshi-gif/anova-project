@@ -1,24 +1,19 @@
 name: Run Playwright Tests
 
 on:
+
   workflow_dispatch:
   push:
     branches:
       - main
-  
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
+permissions:
+  contents: write
 
 jobs:
   run_tests:
     runs-on: ubuntu-latest
-
-
-    steps: 
-
+    steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -34,13 +29,13 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-    
+            ${{ runner.os }}-node-
 
 
       - name: Install Dependencies
         run: |
-          npm ci
-          npx playwright install
+             npm ci
+             npx playwright install
 
       - name: Run Playwright tests in headless mode
         run: |
@@ -48,40 +43,39 @@ jobs:
         env:
           CI: true
 
-      # Upload HTML Report Artifact
+
+
+      # ✅ Upload HTML Report
       - name: Upload Playwright Report
-        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: reports/
 
-      # Upload Traces, Videos, Screenshots
-      - name: Upload Test Results
-        if: always()
+      # ✅ Upload Traces, Videos, Screenshots
+
+      - name: Upload Test Results (Trace/Video/Screenshot)
         uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: test-results/
 
-      # GitHub Pages Setup
-      - name: Setup Pages
-        if: always()
-        uses: actions/configure-pages@v5
 
-      - name: Upload Pages Artifact
+
+      # ✅ Deploy HTML Report (Public)
+
+      - name: Deploy Report to GitHub Pages
         if: always()
-        uses: actions/upload-pages-artifact@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: reports/
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./reports
 
-      - name: Deploy to GitHub Pages
-        if: always()
-        id: deployment
-        uses: actions/deploy-pages@v4
+     
 
-      # PASS Email
-      - name: Send Email (PASS)
+      # ✅ Email PASS
+
+      - name: Send Email to Client (PASS)
         if: success()
         uses: dawidd6/action-send-mail@v4
         with:
@@ -95,16 +89,21 @@ jobs:
           cc: ankita.mahadik@pulsesolutions.net
           from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
           body: |
-            ✅ All Playwright test cases passed successfully.
 
-            📊 Public Report:
-            ${{ steps.deployment.outputs.page_url }}
+            ✅ All test cases passed successfully.
 
-            📦 GitHub Run:
+            📊 Summary:
+
+            📦 Download Full Report (Trace + Video + Screenshot):
+
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-      # FAIL Email
-      - name: Send Email (FAIL)
+
+      # ❌ Email FAIL (Detailed)
+
+
+
+      - name: Send Email to Developer (FAIL)
         if: failure()
         uses: dawidd6/action-send-mail@v4
         with:
@@ -117,18 +116,23 @@ jobs:
           to: meet.joshi@pulsesolutions.net
           from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
           body: |
-            ❌ Some Playwright test cases failed.
 
-            📊 Public Report:
-            ${{ steps.deployment.outputs.page_url }}
+            ❌ Some test cases failed.
 
-            📦 GitHub Run:
+            📊 Summary:
+
+            📦 Download Artifacts (Trace / Video / Screenshot):
+
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-            📥 Download the "test-results" artifact for:
-            - Trace files
-            - Videos
-            - Screenshots
+            1. Download "test-results" artifact
+            2. Extract files
+            3. Run: npx playwright show-trace trace.zip
 
-            To open a trace locally:
-            npx playwright show-trace trace.zip
+            🎥 Videos & 📸 Screenshots are inside the same artifact.
+
+            3. Run: npx playwright show-trace trace.zip
+
+
+
+           
