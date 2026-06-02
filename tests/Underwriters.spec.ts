@@ -26,6 +26,7 @@ test.describe.serial('Underwriter Flow', () => {
     test('Test 1 - Underwriter Creation', async () => {
         await page.goto('https://newdev.anovamarine.com/revised/admin/users_underwriters');
         await page.reload();
+        await page.waitForTimeout(2000);
         await page.getByRole('link', { name: 'Add New Underwriter' }).click();
         companyName = `Underwriter_${Date.now()}`;
         const phone = `9${Math.floor(100000000 + Math.random() * 900000000)}`;
