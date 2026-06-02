@@ -20,7 +20,7 @@ test.setTimeout(30000);
         await page.getByRole('button', { name: 'Log In' }).click();
         await page.waitForTimeout(5000);
 
-        console.log('Login Successful');
+        console.log('Login Successful For Underwriters Flow');
     });
 
     test('Test 1 - Underwriter Creation', async () => {
@@ -126,7 +126,7 @@ test.setTimeout(30000);
 
     test.afterAll(async () => {
         await context.close();
-        console.log('Browser Closed Successfully');
+        console.log('Browser Closed Successfully for Underwriters Flow');
     })
 
 });

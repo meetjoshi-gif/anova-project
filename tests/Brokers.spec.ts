@@ -22,7 +22,7 @@ test.describe.serial('Broker Flow', () => {
 
     await page.waitForTimeout(5000);
 
-    console.log('Login Successful');
+    console.log('Login Successful For Brokers Flow');
   });
 
 
@@ -133,6 +133,6 @@ test.describe.serial('Broker Flow', () => {
 
   test.afterAll(async () => {
     await context.close();
-    console.log('Browser Closed Successfully');
+    console.log('Browser Closed Successfully for Brokers Flow');
   });
 });

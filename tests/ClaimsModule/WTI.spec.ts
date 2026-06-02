@@ -158,7 +158,7 @@ test.describe.serial('Claims module WTI', () => {
 
     await page.getByRole('button', { name: 'Log In' }).click();
     await page.waitForTimeout(5000);
-    console.log('Login Successful');
+    console.log('Login Successful for WTI Claims');
   });
 
   test('Test 2 - WTI Claims reject and Accept', async () => {
@@ -261,6 +261,6 @@ test.describe.serial('Claims module WTI', () => {
   })
   test.afterAll(async () => {
     await context.close();
-    console.log('Browser Closed Successfully');
+    console.log('Browser Closed Successfully for WTI Claims');
   })
 }) 

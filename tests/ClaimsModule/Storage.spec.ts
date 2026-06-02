@@ -244,7 +244,7 @@ test.describe.serial('Storage and Cargo', () => {
 
     await page.getByRole('button', { name: 'Log In' }).click();
     await page.waitForTimeout(2000);
-    console.log('Login Successful');
+    console.log('Login Successful for Storage and Cargo Claims');
   });
   test('Allow assigning and rejecting claims', async () => {
     await page.waitForTimeout(2000);
@@ -279,4 +279,9 @@ test.describe.serial('Storage and Cargo', () => {
     await page.getByRole('link', { name: 'Download' }).click();
     const download = await downloadPromise;
   });
+  test.afterAll(async () => {
+      await context.close();
+      console.log('Browser Closed Successfully for Storage and Cargo Claims');
+  })
+
 })

@@ -26,7 +26,7 @@ test.describe('Clients User Management', () => {
     // Store page for use in all tests
     sharedPage = page;
 
-    console.log('✅ Admin logged in successfully - Session ready for all tests');
+    console.log('✅ Admin logged in successfully - Clients user');
   });
 
   test('Test 1 - Create Client with Unique Name', async () => {

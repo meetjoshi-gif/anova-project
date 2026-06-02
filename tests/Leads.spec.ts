@@ -24,7 +24,7 @@ test.describe.serial('Leads Flow ', () => {
 
         await page.waitForTimeout(5000);
 
-        console.log('Login Successful');
+        console.log('Login Successful For Leads Flow');
     });
 
 
@@ -117,7 +117,7 @@ test.describe.serial('Leads Flow ', () => {
 
     test.afterAll(async () => {
         await context.close();
-        console.log('Browser Closed Successfully');
+        console.log('Browser Closed Successfully for Leads Flow');
     })
 
 });

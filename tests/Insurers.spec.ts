@@ -19,6 +19,7 @@ test.describe.serial('Insurer Module', () => {
     await page.getByRole('textbox', { name: 'Password' }).fill('123456');
 
     await page.getByRole('button', { name: 'Log In' }).click();
+    console.log('Login Successful For Insurers Flow');
   });
 
 

@@ -23,7 +23,7 @@ test.describe.serial('Claims module', () => {
 
         await page.waitForTimeout(5000);
 
-        console.log('Login Successful');
+        console.log('Login Successful for Third-party claims');
     });
 
     test('Test 1 - Third-Party Claims Created', async () => {
@@ -177,5 +177,5 @@ test.describe.serial('Claims module', () => {
 });
 test.afterAll(async () => {
     await context.close();
-    console.log('Browser Closed Successfully');
+    console.log('Browser Closed Successfully for Third-party claims');
 });
