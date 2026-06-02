@@ -1,5 +1,5 @@
 import { test, expect, Browser, BrowserContext, Page } from '@playwright/test';
-import path from 'path/win32';
+import path from 'path';
 
 let context: BrowserContext;
 let page: Page;
@@ -221,16 +221,11 @@ test.describe.serial('Claims module WTI', () => {
     }).click();
 
     console.log(`Executed Action: ${randomAction}`);
-    await page.reload();
-    await page.getByRole('textbox', { name: 'Search by Request #, Name,' }).fill(email);
-    await page.getByRole('button').filter({ hasText: /^$/ }).click();
-    await page.getByTitle('Reset').click();
 
-    console.log('Searched for WTI Claim with Email:', email);
   })
 
 
-  test('Test 4 - WTI Claims Filter', async () => {
+  test('Test 3 - WTI Claims Filter', async () => {
     await page.reload();
     await page.getByText('Filter', { exact: true }).click();
     const statusOptions = ['Accepted', 'Rejected'];
@@ -254,6 +249,15 @@ test.describe.serial('Claims module WTI', () => {
     console.log('Filter applied and reset successfully');
 
 
+  })
+
+  test('Test 4 - WTI Claim Email Validation', async () => {
+    await page.reload();
+    await page.getByRole('textbox', { name: 'Search by Request #, Name,' }).fill('wti1780397073649@yopmail.com');
+    await page.getByRole('button').filter({ hasText: /^$/ }).click();
+    await page.getByTitle('Reset').click();
+
+    console.log('Searched for WTI Claim with Email:', email);
   })
   test.afterAll(async () => {
     await context.close();

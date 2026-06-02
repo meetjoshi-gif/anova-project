@@ -1,5 +1,5 @@
 import { test, expect, Browser, BrowserContext, Page } from '@playwright/test';
-import path from 'path/win32';
+import path from 'path';
 
 let currentDate;
 let currentYear;
@@ -192,8 +192,7 @@ test('FrontEnd Self Storage Claim', async ({ page }) => {
   console.log('Step 4 completed: Itemized Inventory');
 
   //Step 5
-  await page.reload();
-    await page.waitForTimeout(2000);
+  await page.waitForTimeout(5000);
   const filePath = path.join(process.cwd(), 'uploads', 'Claimupload.pdf');
   await page.locator('input[name="st_file_1"]').setInputFiles(filePath);
   console.log('Lease Agreement uploaded successfully');
@@ -215,6 +214,12 @@ test('FrontEnd Self Storage Claim', async ({ page }) => {
   const filePath4 = path.join(process.cwd(), 'uploads', 'Claimupload.pdf');
   await page.locator('input[name="st_file_4"]').setInputFiles(filePath4);
   console.log('facility uploaded successfully');
+
+  console.log('cwd:', process.cwd());
+  console.log('filePath:', filePath);
+  console.log('filePath:', filePath2);
+  console.log('filePath:', filePath3);
+  console.log('filePath:', filePath4);
   await page.waitForTimeout(2000);
   await page.getByRole('textbox', { name: 'Typed Full Name*' }).fill('TEST');
   await page.locator('canvas').click({
@@ -273,10 +278,10 @@ test.describe.serial('Storage and Cargo', () => {
     }
   });
   test('Test 2 - Storage/Cargo Download', async () => {
-      await page.reload();
-      await page.locator('.btn.btn-sm.btn-icon').first().click();
-      const downloadPromise = page.waitForEvent('download');
-      await page.getByRole('link', { name: 'Download' }).click();
-      const download = await downloadPromise;
-    });
-  })
+    await page.reload();
+    await page.locator('.btn.btn-sm.btn-icon').first().click();
+    const downloadPromise = page.waitForEvent('download');
+    await page.getByRole('link', { name: 'Download' }).click();
+    const download = await downloadPromise;
+  });
+})
