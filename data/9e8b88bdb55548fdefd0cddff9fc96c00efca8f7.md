@@ -1,0 +1,704 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ClaimsModule/FirstParty.spec.ts >> Claims module >> Test 1 - First-Party Claims Created
+- Location: tests/ClaimsModule/FirstParty.spec.ts:29:7
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://newdev.anovamarine.com/revised/admin/claims/index?pending=1", waiting until "load"
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - text: 
+      - link "Logo" [ref=e7] [cursor=pointer]:
+        - /url: https://newdev.anovamarine.com/revised/admin/
+        - img "Logo" [ref=e8]
+    - generic [ref=e10]:
+      - generic [ref=e13]:
+        - generic [ref=e15] [cursor=pointer]:
+          - img "United States" [ref=e16]
+          - text: EN 
+        - generic [ref=e19] [cursor=pointer]: 
+        - generic [ref=e22] [cursor=pointer]: 
+        - generic [ref=e23]:
+          - generic [ref=e24]: Anova Admin
+          - generic [ref=e26] [cursor=pointer]: 
+      - text: 
+  - generic [ref=e27]:
+    - list [ref=e31]:
+      - listitem [ref=e32]:
+        - link " Dashboard" [ref=e33] [cursor=pointer]:
+          - /url: https://newdev.anovamarine.com/revised/admin/index
+          - generic [ref=e34]: 
+          - generic [ref=e35]: Dashboard
+      - listitem [ref=e36]:
+        - link " Users" [ref=e37] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic [ref=e38]: 
+          - generic [ref=e39]: Users
+      - listitem [ref=e40]:
+        - link " Claims" [ref=e41] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e42]: 
+          - generic [ref=e43]: Claims
+      - listitem [ref=e44]:
+        - link " Sales" [ref=e45] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e46]: 
+          - generic [ref=e47]: Sales
+      - listitem [ref=e48]:
+        - link " LC Requests" [ref=e49] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e50]: 
+          - generic [ref=e51]: LC Requests
+      - listitem [ref=e52]:
+        - link " Cert Riders 70" [ref=e53] [cursor=pointer]:
+          - /url: https://newdev.anovamarine.com/revised/admin/cert_riders/index
+          - generic [ref=e54]: 
+          - generic [ref=e55]: Cert Riders
+          - generic [ref=e56]: "70"
+      - listitem [ref=e57]:
+        - link " Accounting" [ref=e58] [cursor=pointer]:
+          - /url: https://newdev.anovamarine.com/revised/admin/accounting/index
+          - generic [ref=e59]: 
+          - generic [ref=e60]: Accounting
+      - listitem [ref=e61]:
+        - link " Reports" [ref=e62] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e63]: 
+          - generic [ref=e64]: Reports
+      - listitem [ref=e65]:
+        - link " LC Reports" [ref=e66] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e67]: 
+          - generic [ref=e68]: LC Reports
+      - listitem [ref=e69]:
+        - link " Anova AI" [ref=e70] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e71]: 
+          - generic [ref=e72]: Anova AI
+    - generic [ref=e74]:
+      - generic [ref=e77]:
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - heading "Claims" [level=1] [ref=e82]
+            - list [ref=e83]:
+              - listitem [ref=e84]:
+                - link "Dashboard" [ref=e85] [cursor=pointer]:
+                  - /url: https://newdev.anovamarine.com/revised/admin/index
+              - listitem [ref=e86]
+              - listitem [ref=e88]: Claims
+          - generic [ref=e89]:
+            - text: 
+            - generic [ref=e90]:
+              - link "Add New Claim" [ref=e92] [cursor=pointer]:
+                - /url: javascript:void(0);
+              - generic [ref=e94]:
+                - 'textbox "Search by Claim #, Cert #" [ref=e95]':
+                  - /placeholder: "Search by Enter Claim #, Cert #"
+                - button [ref=e96] [cursor=pointer]:
+                  - generic [ref=e97]: 
+                - link "" [ref=e98] [cursor=pointer]:
+                  - /url: https://newdev.anovamarine.com/revised/admin/claims/index
+                  - generic [ref=e99]: 
+              - generic [ref=e102] [cursor=pointer]:
+                - text: Columns Setting
+                - generic [ref=e103]: 
+              - generic [ref=e105]:
+                - generic [ref=e106] [cursor=pointer]:
+                  - text: Filter
+                  - generic [ref=e107]: 
+                - text: 
+        - generic [ref=e110]:
+          - heading "Claims" [level=3] [ref=e112]:
+            - generic [ref=e113]: Claims
+          - generic [ref=e114]:
+            - table [ref=e116]:
+              - rowgroup [ref=e117]:
+                - 'row "Claim # Details Amount Claimed Sum Insured Status Reason of Rejection Action" [ref=e118]':
+                  - 'columnheader "Claim #" [ref=e119]'
+                  - columnheader "Details" [ref=e120]
+                  - columnheader "Amount Claimed" [ref=e121]
+                  - columnheader "Sum Insured" [ref=e122]
+                  - columnheader "Status" [ref=e123]
+                  - columnheader "Reason of Rejection" [ref=e124]
+                  - columnheader "Action" [ref=e125]
+              - rowgroup [ref=e126]:
+                - 'row "474-2026-337 Anova Claim Date 06/02/2026 Cert # / Ref # OCMR-1008-2026 Underwriter AIG Broker Keri LC2 Test Client Worldwide Transit Insurance Brokers, Inc. Beneficiary First1780408623940 Last1780408623940 Location of Loss United States Claim Handler Angel Mederos $10.00 $0.00 Open " [ref=e127]':
+                  - cell "474-2026-337 Anova" [ref=e128]:
+                    - link "474-2026-337" [ref=e129] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/748
+                    - generic [ref=e130]: Anova
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # OCMR-1008-2026 Underwriter AIG Broker Keri LC2 Test Client Worldwide Transit Insurance Brokers, Inc. Beneficiary First1780408623940 Last1780408623940 Location of Loss United States Claim Handler Angel Mederos" [ref=e131]':
+                    - list [ref=e132]:
+                      - listitem [ref=e133]:
+                        - generic [ref=e134]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e135]:
+                        - generic [ref=e136]: "Cert # / Ref #"
+                        - text: OCMR-1008-2026
+                      - listitem [ref=e137]:
+                        - generic [ref=e138]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e139]:
+                        - generic [ref=e140]: Broker
+                        - text: Keri LC2 Test
+                      - listitem [ref=e141]:
+                        - generic [ref=e142]: Client
+                        - text: Worldwide Transit Insurance Brokers, Inc.
+                      - listitem [ref=e143]:
+                        - generic [ref=e144]: Beneficiary
+                        - text: First1780408623940 Last1780408623940
+                      - listitem [ref=e145]:
+                        - generic [ref=e146]: Location of Loss
+                        - text: United States
+                      - listitem [ref=e147]:
+                        - generic [ref=e148]: Claim Handler
+                        - text: Angel Mederos
+                  - cell "$10.00" [ref=e149]
+                  - cell "$0.00" [ref=e150]
+                  - cell "Open" [ref=e151]
+                  - cell [ref=e152]
+                  - cell "" [ref=e153]:
+                    - link "" [ref=e156] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e158]: 
+                - 'row "474-2026-336 Anova Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780408613812 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary Reserve Amount 1.00 Claim Handler Angel Mederos $1.00 $1,000.00 Open " [ref=e159]':
+                  - cell "474-2026-336 Anova" [ref=e160]:
+                    - link "474-2026-336" [ref=e161] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/747
+                    - generic [ref=e162]: Anova
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780408613812 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary Reserve Amount 1.00 Claim Handler Angel Mederos" [ref=e163]':
+                    - list [ref=e164]:
+                      - listitem [ref=e165]:
+                        - generic [ref=e166]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e167]:
+                        - generic [ref=e168]: "Cert # / Ref #"
+                        - text: Testing Refer 1780408613812
+                      - listitem [ref=e169]:
+                        - generic [ref=e170]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e171]:
+                        - generic [ref=e172]: Broker
+                        - text: "-"
+                      - listitem [ref=e173]:
+                        - generic [ref=e174]: Client
+                        - text: Keri Anderson Client Company
+                      - listitem [ref=e175]:
+                        - generic [ref=e176]: Beneficiary
+                      - listitem [ref=e177]:
+                        - generic [ref=e178]: Reserve Amount
+                        - text: "1.00"
+                      - listitem [ref=e179]:
+                        - generic [ref=e180]: Claim Handler
+                        - text: Angel Mederos
+                  - cell "$1.00" [ref=e181]
+                  - cell "$1,000.00" [ref=e182]
+                  - cell "Open" [ref=e183]
+                  - cell [ref=e184]
+                  - cell "" [ref=e185]:
+                    - link "" [ref=e188] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e190]: 
+                - 'row "474-2026-335 Logistiq Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780408553526 Underwriter AIG Broker - Client Keri Anderson Client Logistiq Beneficiary test Location of Loss United States Reserve Amount 100.00 Claim Handler Schien Dong $100.00 $1,000.00 Open " [ref=e191]':
+                  - cell "474-2026-335 Logistiq" [ref=e192]:
+                    - link "474-2026-335" [ref=e193] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/746
+                    - generic [ref=e194]: Logistiq
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780408553526 Underwriter AIG Broker - Client Keri Anderson Client Logistiq Beneficiary test Location of Loss United States Reserve Amount 100.00 Claim Handler Schien Dong" [ref=e195]':
+                    - list [ref=e196]:
+                      - listitem [ref=e197]:
+                        - generic [ref=e198]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e199]:
+                        - generic [ref=e200]: "Cert # / Ref #"
+                        - text: Testing Refer 1780408553526
+                      - listitem [ref=e201]:
+                        - generic [ref=e202]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e203]:
+                        - generic [ref=e204]: Broker
+                        - text: "-"
+                      - listitem [ref=e205]:
+                        - generic [ref=e206]: Client
+                        - text: Keri Anderson Client Logistiq
+                      - listitem [ref=e207]:
+                        - generic [ref=e208]: Beneficiary
+                        - text: test
+                      - listitem [ref=e209]:
+                        - generic [ref=e210]: Location of Loss
+                        - text: United States
+                      - listitem [ref=e211]:
+                        - generic [ref=e212]: Reserve Amount
+                        - text: "100.00"
+                      - listitem [ref=e213]:
+                        - generic [ref=e214]: Claim Handler
+                        - text: Schien Dong
+                  - cell "$100.00" [ref=e215]
+                  - cell "$1,000.00" [ref=e216]
+                  - cell "Open" [ref=e217]
+                  - cell [ref=e218]
+                  - cell "" [ref=e219]:
+                    - link "" [ref=e222] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e224]: 
+                - 'row "474-2026-334 Anova Claim Date 06/02/2026 Cert # / Ref # OCMR-1008-2026 Underwriter AIG Broker Keri LC2 Test Client Worldwide Transit Insurance Brokers, Inc. Beneficiary First1780408183752 Last1780408183752 Location of Loss United States Claim Handler Angel Mederos $10.00 $0.00 Open " [ref=e225]':
+                  - cell "474-2026-334 Anova" [ref=e226]:
+                    - link "474-2026-334" [ref=e227] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/745
+                    - generic [ref=e228]: Anova
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # OCMR-1008-2026 Underwriter AIG Broker Keri LC2 Test Client Worldwide Transit Insurance Brokers, Inc. Beneficiary First1780408183752 Last1780408183752 Location of Loss United States Claim Handler Angel Mederos" [ref=e229]':
+                    - list [ref=e230]:
+                      - listitem [ref=e231]:
+                        - generic [ref=e232]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e233]:
+                        - generic [ref=e234]: "Cert # / Ref #"
+                        - text: OCMR-1008-2026
+                      - listitem [ref=e235]:
+                        - generic [ref=e236]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e237]:
+                        - generic [ref=e238]: Broker
+                        - text: Keri LC2 Test
+                      - listitem [ref=e239]:
+                        - generic [ref=e240]: Client
+                        - text: Worldwide Transit Insurance Brokers, Inc.
+                      - listitem [ref=e241]:
+                        - generic [ref=e242]: Beneficiary
+                        - text: First1780408183752 Last1780408183752
+                      - listitem [ref=e243]:
+                        - generic [ref=e244]: Location of Loss
+                        - text: United States
+                      - listitem [ref=e245]:
+                        - generic [ref=e246]: Claim Handler
+                        - text: Angel Mederos
+                  - cell "$10.00" [ref=e247]
+                  - cell "$0.00" [ref=e248]
+                  - cell "Open" [ref=e249]
+                  - cell [ref=e250]
+                  - cell "" [ref=e251]:
+                    - link "" [ref=e254] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e256]: 
+                - 'row "474-2026-333 Anova Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780408172733 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary Reserve Amount 1.00 Claim Handler Angel Mederos $1.00 $1,000.00 Open " [ref=e257]':
+                  - cell "474-2026-333 Anova" [ref=e258]:
+                    - link "474-2026-333" [ref=e259] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/744
+                    - generic [ref=e260]: Anova
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780408172733 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary Reserve Amount 1.00 Claim Handler Angel Mederos" [ref=e261]':
+                    - list [ref=e262]:
+                      - listitem [ref=e263]:
+                        - generic [ref=e264]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e265]:
+                        - generic [ref=e266]: "Cert # / Ref #"
+                        - text: Testing Refer 1780408172733
+                      - listitem [ref=e267]:
+                        - generic [ref=e268]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e269]:
+                        - generic [ref=e270]: Broker
+                        - text: "-"
+                      - listitem [ref=e271]:
+                        - generic [ref=e272]: Client
+                        - text: Keri Anderson Client Company
+                      - listitem [ref=e273]:
+                        - generic [ref=e274]: Beneficiary
+                      - listitem [ref=e275]:
+                        - generic [ref=e276]: Reserve Amount
+                        - text: "1.00"
+                      - listitem [ref=e277]:
+                        - generic [ref=e278]: Claim Handler
+                        - text: Angel Mederos
+                  - cell "$1.00" [ref=e279]
+                  - cell "$1,000.00" [ref=e280]
+                  - cell "Open" [ref=e281]
+                  - cell [ref=e282]
+                  - cell "" [ref=e283]:
+                    - link "" [ref=e286] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e288]: 
+                - 'row "474-2026-332 Logistiq Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780408109249 Underwriter AIG Broker - Client Keri Anderson Client Logistiq Beneficiary test Location of Loss United States Reserve Amount 100.00 Claim Handler Schien Dong $100.00 $1,000.00 Open " [ref=e289]':
+                  - cell "474-2026-332 Logistiq" [ref=e290]:
+                    - link "474-2026-332" [ref=e291] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/743
+                    - generic [ref=e292]: Logistiq
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780408109249 Underwriter AIG Broker - Client Keri Anderson Client Logistiq Beneficiary test Location of Loss United States Reserve Amount 100.00 Claim Handler Schien Dong" [ref=e293]':
+                    - list [ref=e294]:
+                      - listitem [ref=e295]:
+                        - generic [ref=e296]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e297]:
+                        - generic [ref=e298]: "Cert # / Ref #"
+                        - text: Testing Refer 1780408109249
+                      - listitem [ref=e299]:
+                        - generic [ref=e300]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e301]:
+                        - generic [ref=e302]: Broker
+                        - text: "-"
+                      - listitem [ref=e303]:
+                        - generic [ref=e304]: Client
+                        - text: Keri Anderson Client Logistiq
+                      - listitem [ref=e305]:
+                        - generic [ref=e306]: Beneficiary
+                        - text: test
+                      - listitem [ref=e307]:
+                        - generic [ref=e308]: Location of Loss
+                        - text: United States
+                      - listitem [ref=e309]:
+                        - generic [ref=e310]: Reserve Amount
+                        - text: "100.00"
+                      - listitem [ref=e311]:
+                        - generic [ref=e312]: Claim Handler
+                        - text: Schien Dong
+                  - cell "$100.00" [ref=e313]
+                  - cell "$1,000.00" [ref=e314]
+                  - cell "Open" [ref=e315]
+                  - cell [ref=e316]
+                  - cell "" [ref=e317]:
+                    - link "" [ref=e320] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e322]: 
+                - 'row "474-2026-331 Anova Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780407091434 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary Reserve Amount 1.00 Claim Handler Angel Mederos $1.00 $1,000.00 Open " [ref=e323]':
+                  - cell "474-2026-331 Anova" [ref=e324]:
+                    - link "474-2026-331" [ref=e325] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/742
+                    - generic [ref=e326]: Anova
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780407091434 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary Reserve Amount 1.00 Claim Handler Angel Mederos" [ref=e327]':
+                    - list [ref=e328]:
+                      - listitem [ref=e329]:
+                        - generic [ref=e330]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e331]:
+                        - generic [ref=e332]: "Cert # / Ref #"
+                        - text: Testing Refer 1780407091434
+                      - listitem [ref=e333]:
+                        - generic [ref=e334]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e335]:
+                        - generic [ref=e336]: Broker
+                        - text: "-"
+                      - listitem [ref=e337]:
+                        - generic [ref=e338]: Client
+                        - text: Keri Anderson Client Company
+                      - listitem [ref=e339]:
+                        - generic [ref=e340]: Beneficiary
+                      - listitem [ref=e341]:
+                        - generic [ref=e342]: Reserve Amount
+                        - text: "1.00"
+                      - listitem [ref=e343]:
+                        - generic [ref=e344]: Claim Handler
+                        - text: Angel Mederos
+                  - cell "$1.00" [ref=e345]
+                  - cell "$1,000.00" [ref=e346]
+                  - cell "Open" [ref=e347]
+                  - cell [ref=e348]
+                  - cell "" [ref=e349]:
+                    - link "" [ref=e352] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e354]: 
+                - 'row "474-2026-330 Anova Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780407026923 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary test Location of Loss United States Reserve Amount 100.00 Claim Handler Angel Mederos $100.00 $1,000.00 Open " [ref=e355]':
+                  - cell "474-2026-330 Anova" [ref=e356]:
+                    - link "474-2026-330" [ref=e357] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/741
+                    - generic [ref=e358]: Anova
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780407026923 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary test Location of Loss United States Reserve Amount 100.00 Claim Handler Angel Mederos" [ref=e359]':
+                    - list [ref=e360]:
+                      - listitem [ref=e361]:
+                        - generic [ref=e362]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e363]:
+                        - generic [ref=e364]: "Cert # / Ref #"
+                        - text: Testing Refer 1780407026923
+                      - listitem [ref=e365]:
+                        - generic [ref=e366]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e367]:
+                        - generic [ref=e368]: Broker
+                        - text: "-"
+                      - listitem [ref=e369]:
+                        - generic [ref=e370]: Client
+                        - text: Keri Anderson Client Company
+                      - listitem [ref=e371]:
+                        - generic [ref=e372]: Beneficiary
+                        - text: test
+                      - listitem [ref=e373]:
+                        - generic [ref=e374]: Location of Loss
+                        - text: United States
+                      - listitem [ref=e375]:
+                        - generic [ref=e376]: Reserve Amount
+                        - text: "100.00"
+                      - listitem [ref=e377]:
+                        - generic [ref=e378]: Claim Handler
+                        - text: Angel Mederos
+                  - cell "$100.00" [ref=e379]
+                  - cell "$1,000.00" [ref=e380]
+                  - cell "Open" [ref=e381]
+                  - cell [ref=e382]
+                  - cell "" [ref=e383]:
+                    - link "" [ref=e386] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e388]: 
+                - 'row "474-2026-329 Anova Claim Date 06/02/2026 Cert # / Ref # OCMR-1008-2026 Underwriter AIG Broker Keri LC2 Test Client Worldwide Transit Insurance Brokers, Inc. Beneficiary First1780401962186 Last1780401962186 Location of Loss United States Claim Handler Angel Mederos $10.00 $0.00 Open " [ref=e389]':
+                  - cell "474-2026-329 Anova" [ref=e390]:
+                    - link "474-2026-329" [ref=e391] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/740
+                    - generic [ref=e392]: Anova
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # OCMR-1008-2026 Underwriter AIG Broker Keri LC2 Test Client Worldwide Transit Insurance Brokers, Inc. Beneficiary First1780401962186 Last1780401962186 Location of Loss United States Claim Handler Angel Mederos" [ref=e393]':
+                    - list [ref=e394]:
+                      - listitem [ref=e395]:
+                        - generic [ref=e396]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e397]:
+                        - generic [ref=e398]: "Cert # / Ref #"
+                        - text: OCMR-1008-2026
+                      - listitem [ref=e399]:
+                        - generic [ref=e400]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e401]:
+                        - generic [ref=e402]: Broker
+                        - text: Keri LC2 Test
+                      - listitem [ref=e403]:
+                        - generic [ref=e404]: Client
+                        - text: Worldwide Transit Insurance Brokers, Inc.
+                      - listitem [ref=e405]:
+                        - generic [ref=e406]: Beneficiary
+                        - text: First1780401962186 Last1780401962186
+                      - listitem [ref=e407]:
+                        - generic [ref=e408]: Location of Loss
+                        - text: United States
+                      - listitem [ref=e409]:
+                        - generic [ref=e410]: Claim Handler
+                        - text: Angel Mederos
+                  - cell "$10.00" [ref=e411]
+                  - cell "$0.00" [ref=e412]
+                  - cell "Open" [ref=e413]
+                  - cell [ref=e414]
+                  - cell "" [ref=e415]:
+                    - link "" [ref=e418] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e420]: 
+                - 'row "474-2026-328 Anova Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780401951012 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary Reserve Amount 1.00 Claim Handler Angel Mederos $1.00 $1,000.00 Open " [ref=e421]':
+                  - cell "474-2026-328 Anova" [ref=e422]:
+                    - link "474-2026-328" [ref=e423] [cursor=pointer]:
+                      - /url: https://newdev.anovamarine.com/revised/admin/claims/edit_claims/739
+                    - generic [ref=e424]: Anova
+                  - 'cell "Claim Date 06/02/2026 Cert # / Ref # Testing Refer 1780401951012 Underwriter AIG Broker - Client Keri Anderson Client Company Beneficiary Reserve Amount 1.00 Claim Handler Angel Mederos" [ref=e425]':
+                    - list [ref=e426]:
+                      - listitem [ref=e427]:
+                        - generic [ref=e428]: Claim Date
+                        - text: 06/02/2026
+                      - listitem [ref=e429]:
+                        - generic [ref=e430]: "Cert # / Ref #"
+                        - text: Testing Refer 1780401951012
+                      - listitem [ref=e431]:
+                        - generic [ref=e432]: Underwriter
+                        - text: AIG
+                      - listitem [ref=e433]:
+                        - generic [ref=e434]: Broker
+                        - text: "-"
+                      - listitem [ref=e435]:
+                        - generic [ref=e436]: Client
+                        - text: Keri Anderson Client Company
+                      - listitem [ref=e437]:
+                        - generic [ref=e438]: Beneficiary
+                      - listitem [ref=e439]:
+                        - generic [ref=e440]: Reserve Amount
+                        - text: "1.00"
+                      - listitem [ref=e441]:
+                        - generic [ref=e442]: Claim Handler
+                        - text: Angel Mederos
+                  - cell "$1.00" [ref=e443]
+                  - cell "$1,000.00" [ref=e444]
+                  - cell "Open" [ref=e445]
+                  - cell [ref=e446]
+                  - cell "" [ref=e447]:
+                    - link "" [ref=e450] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic [ref=e452]: 
+            - generic [ref=e454]:
+              - generic [ref=e455]:
+                - combobox "Select records to show" [ref=e456]:
+                  - option "10" [selected]
+                  - option "25"
+                  - option "100"
+                - text: Showing 1 to 10 of 547 entries
+              - list [ref=e458]:
+                - listitem [ref=e459]:
+                  - link "1" [ref=e460] [cursor=pointer]:
+                    - /url: javascript:void(0);
+                - listitem [ref=e461]:
+                  - link "2" [ref=e462] [cursor=pointer]:
+                    - /url: https://newdev.anovamarine.com/revised/admin/claims/index/10?pending=1
+                - listitem [ref=e463]:
+                  - link "3" [ref=e464] [cursor=pointer]:
+                    - /url: https://newdev.anovamarine.com/revised/admin/claims/index/20?pending=1
+                - listitem [ref=e465]:
+                  - link "4" [ref=e466] [cursor=pointer]:
+                    - /url: https://newdev.anovamarine.com/revised/admin/claims/index/30?pending=1
+                - listitem [ref=e467]:
+                  - link [ref=e468] [cursor=pointer]:
+                    - /url: https://newdev.anovamarine.com/revised/admin/claims/index/10?pending=1
+      - generic [ref=e473]:
+        - text: ©
+        - text: Anova Marine | All rights reserved.
+```
+
+# Test source
+
+```ts
+  1   | import { test, expect, Browser, BrowserContext, Page } from '@playwright/test';
+  2   | 
+  3   | 
+  4   | let context: BrowserContext;
+  5   | let page: Page;
+  6   | let companyName: string;
+  7   | 
+  8   | test.describe.serial('Claims module', () => {
+  9   | 
+  10  |   // Before All
+  11  |   test.beforeAll(async ({ browser }) => {
+  12  | 
+  13  |     context = await browser.newContext();
+  14  |     page = await context.newPage();
+  15  | 
+  16  |     await page.goto('https://newdev.anovamarine.com/revised/login/index');
+  17  | 
+  18  |     await page.getByRole('textbox', { name: 'Email' }).fill('keri.anderson97+admin@gmail.com');
+  19  | 
+  20  |     await page.getByRole('textbox', { name: 'Password' }).fill('123456');
+  21  | 
+  22  |     await page.getByRole('button', { name: 'Log In' }).click();
+  23  | 
+  24  |     await page.waitForTimeout(5000);
+  25  | 
+  26  |     console.log('Login Successful for first-party claims');
+  27  |   });
+  28  | 
+  29  |   test('Test 1 - First-Party Claims Created', async () => {
+  30  |     await page.getByRole('link', { name: ' Claims' }).click();
+> 31  |     await page.goto('https://newdev.anovamarine.com/revised/admin/claims/index?pending=1');
+      |                ^ Error: page.goto: Target page, context or browser has been closed
+  32  |     await page.reload();
+  33  |     await page.getByRole('link', { name: 'Add New Claim' }).click({timeout: 5000});
+  34  |     await page.getByRole('radio', { name: 'First-Party (Marine Cargo/' }).check();
+  35  |     await page.getByRole('button', { name: 'Continue' }).click();
+  36  |     await page.reload();
+  37  |     await page.getByRole('checkbox', { name: 'Not related to a certificate' }).check();
+  38  |     // By default Anova is selected, sometimes change to Logistiq
+  39  |     const shouldSelectLogistiq = Math.random() < 0.5;
+  40  | 
+  41  |     if (shouldSelectLogistiq) {
+  42  |       // Select Logistiq
+  43  |       await page.getByRole('combobox', { name: 'Anova' }).click();
+  44  |       await page.getByRole('option', { name: 'Logistiq' }).click();
+  45  | 
+  46  |       // Logistiq Claim Handler
+  47  |       await page.getByRole('combobox', { name: 'Select Claim Handler' }).click();
+  48  |       await page.getByRole('option', { name: 'Schien Dong' }).click();
+  49  | 
+  50  |       // Logistiq Client
+  51  |       await page.getByRole('combobox', { name: 'Select Client' }).click();
+  52  |       await page.getByRole('searchbox', { name: 'Search' }).fill('Keri');
+  53  |       await page.getByRole('option', { name: 'Keri Anderson Client Logistiq' }).click();
+  54  | 
+  55  |     } else {
+  56  |       // Keep Anova selected
+  57  | 
+  58  |       // Anova Claim Handler
+  59  |       await page.getByRole('combobox', { name: 'Select Claim Handler' }).click();
+  60  |       await page.getByRole('option', { name: 'Angel Mederos' }).click();
+  61  | 
+  62  |       // Anova Client
+  63  |       await page.getByRole('combobox', { name: 'Select Client' }).click();
+  64  |       await page.getByRole('searchbox', { name: 'Search' }).fill('Keri ander');
+  65  |       await page.getByRole('option', { name: 'Keri Anderson Client Company' }).click();
+  66  |     }
+  67  | 
+  68  |     await page.getByRole('textbox', { name: 'Reference #' }).fill(`Testing Refer ${Date.now()}`);
+  69  |     await page.getByRole('textbox', { name: 'Sum Insured' }).fill('1000');
+  70  |     await page.getByRole('textbox', { name: 'Deductible' }).fill('100');
+  71  |     await page.getByRole('combobox', { name: 'Select Underwriters' }).click();
+  72  |     await page.getByRole('searchbox', { name: 'Search' }).fill('AI');
+  73  |     await page.getByRole('option', { name: 'AIG', exact: true }).click();
+  74  | 
+  75  |     await page.getByRole('combobox', { name: 'Select Beneficiary' }).click();
+  76  |     await page.getByRole('searchbox', { name: 'Search' }).fill('test');
+  77  |     await page.getByRole('option', { name: 'test' }).first().click();
+  78  |     await page.getByRole('combobox', { name: 'Select Country' }).first().click();
+  79  |     await page.getByRole('searchbox', { name: 'Search' }).fill('Unite');
+  80  |     await page.getByRole('option', { name: 'United States', exact: true }).click();
+  81  |     await page.getByRole('combobox', { name: 'Select Country' }).click();
+  82  |     await page.getByRole('searchbox', { name: 'Search' }).fill('United');
+  83  |     await page.getByRole('option', { name: 'United States', exact: true }).click();
+  84  |     await page.getByRole('combobox', { name: 'Select Location of Loss' }).first().click();
+  85  |     await page.getByRole('searchbox', { name: 'Search' }).fill('united');
+  86  |     await page.getByRole('option', { name: 'United States', exact: true }).click();
+  87  |    
+  88  |     const today = new Date();
+  89  |     const previousYear = today.getFullYear() - (Math.floor(Math.random() * 5) + 1);
+  90  | 
+  91  |     const randomMonth = Math.floor(Math.random() * 12);
+  92  |     const randomDay = Math.floor(Math.random() * 28) + 1;
+  93  | 
+  94  |     // Open date picker
+  95  |     await page.getByRole('textbox', { name: 'Approximate Loss Date' }).click();
+  96  | 
+  97  |     // Wait for calendar visible
+  98  |     const calendar = page.locator('.flatpickr-calendar.open');
+  99  |     await calendar.waitFor({ state: 'visible' });
+  100 | 
+  101 |     // Select month
+  102 |     await calendar.locator('.flatpickr-monthDropdown-months')
+  103 |       .selectOption(String(randomMonth));
+  104 | 
+  105 |     // Fill year
+  106 |     const yearInput = calendar.getByRole('spinbutton', { name: 'Year' });
+  107 | 
+  108 |     await yearInput.click();
+  109 |     await yearInput.fill(String(previousYear));
+  110 | 
+  111 |     // Wait calendar update
+  112 |     await page.waitForTimeout(500);
+  113 | 
+  114 |     // Select only CURRENT month visible day
+  115 |     await calendar.locator(
+  116 |       `.flatpickr-day:not(.prevMonthDay):not(.nextMonthDay)`
+  117 |     ).filter({
+  118 |       hasText: String(randomDay)
+  119 |     }).first().click();
+  120 | 
+  121 | 
+  122 |     await page.getByRole('textbox', { name: 'Further Details' }).fill('Testing further details by entering at least 50 characters.Testing further details by entering at least 50 characters.');
+  123 |     await page.getByRole('textbox', { name: 'Amount Claimed' }).fill('100');
+  124 |     await page.getByRole('textbox', { name: 'Reserve amount' }).fill('100');
+  125 |     await page.getByRole('textbox', { name: 'Legal Fee' }).fill('1');
+  126 |     await page.getByRole('textbox', { name: 'Survey Fee' }).fill('1');
+  127 |     await page.getByRole('textbox', { name: 'Bank Fee' }).fill('1');
+  128 |     await page.getByRole('textbox', { name: 'Claim Paid Amount' }).fill('1');
+  129 |     // Generate dynamic company name and email
+  130 |     const randomText = Date.now();
+  131 | 
+```
