@@ -1,23 +1,39 @@
-const http = require('http');
-const fs = require('fs');
+#!/usr/bin/env node
+
+/**
+ * Playwright MCP Server
+ * Starts the Playwright MCP server for Claude Desktop integration
+ * 
+ * Usage: node mcp/server.js
+ * Or: npm run mcp:start
+ */
+
+const { spawn } = require('child_process');
 const path = require('path');
 
-const port = Number(process.env.MCP_PORT || 3000);
-const manifestPath = path.join(__dirname, 'mcp.json');
-
-const server = http.createServer((req, res) => {
-  if (req.url === '/mcp.json' || req.url === '/manifest') {
-    const manifest = fs.readFileSync(manifestPath, 'utf-8');
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(manifest);
-    return;
-  }
-
-  res.writeHead(404, { 'Content-Type': 'text/plain' });
-  res.end('Not found');
+// Use npx to run playwright-mcp CLI (works cross-platform)
+const server = spawn('npx', ['playwright-mcp@latest'], {
+  stdio: 'inherit',
+  cwd: path.join(__dirname, '..'),
+  shell: process.platform === 'win32'
 });
 
-server.listen(port, () => {
-  console.log(`MCP placeholder server running at http://localhost:${port}`);
-  console.log(`Manifest available at http://localhost:${port}/mcp.json`);
+server.on('error', (error) => {
+  console.error('Failed to start Playwright MCP server:', error);
+  process.exit(1);
+});
+
+server.on('close', (code) => {
+  console.log(`Playwright MCP server exited with code ${code}`);
+  process.exit(code || 0);
+});
+
+process.on('SIGINT', () => {
+  console.log('\nShutting down Playwright MCP server...');
+  server.kill('SIGINT');
+});
+
+process.on('SIGTERM', () => {
+  console.log('\nTerminating Playwright MCP server...');
+  server.kill('SIGTERM');
 });

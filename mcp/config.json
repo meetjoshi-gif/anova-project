@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "node",
+      "args": [
+        "mcp/server.js"
+      ],
+      "cwd": "c:\\Users\\meet.joshi\\Anova Project",
+      "env": {
+        "PATH": "c:\\Users\\meet.joshi\\Anova Project\\node_modules\\.bin;%PATH%"
+      }
+    }
+  }
+}
