@@ -30,7 +30,7 @@ test.describe.serial('Claims module', () => {
     await page.getByRole('link', { name: ' Claims' }).click();
     await page.goto('https://newdev.anovamarine.com/revised/admin/claims/index?pending=1');
     await page.reload();
-    await page.getByRole('link', { name: 'Add New Claim' }).click({timeout: 5000});
+    await page.getByRole('link', { name: 'Add New Claim' }).click({ timeout: 5000 });
     await page.getByRole('radio', { name: 'First-Party (Marine Cargo/' }).check();
     await page.getByRole('button', { name: 'Continue' }).click();
     await page.reload();
@@ -45,7 +45,7 @@ test.describe.serial('Claims module', () => {
 
       // Logistiq Claim Handler
       await page.getByRole('combobox', { name: 'Select Claim Handler' }).click();
-      await page.getByRole('option', { name: 'Schien Dong' }).click();
+      await page.getByRole('option', { name: 'Keri Merger Logistiq' }).click();
 
       // Logistiq Client
       await page.getByRole('combobox', { name: 'Select Client' }).click();
@@ -84,7 +84,7 @@ test.describe.serial('Claims module', () => {
     await page.getByRole('combobox', { name: 'Select Location of Loss' }).first().click();
     await page.getByRole('searchbox', { name: 'Search' }).fill('united');
     await page.getByRole('option', { name: 'United States', exact: true }).click();
-   
+
     const today = new Date();
     const previousYear = today.getFullYear() - (Math.floor(Math.random() * 5) + 1);
 
