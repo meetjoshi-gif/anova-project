@@ -19,7 +19,6 @@ test.setTimeout(30000);
         await page.getByRole('textbox', { name: 'Password' }).fill('123456');
         await page.getByRole('button', { name: 'Log In' }).click();
         await page.waitForTimeout(5000);
-
         console.log('Login Successful For Underwriters Flow');
     });
 
@@ -27,7 +26,6 @@ test.setTimeout(30000);
 
         await page.goto('https://newdev.anovamarine.com/revised/admin/users_underwriters');
         await page.reload();
-        await page.waitForTimeout(5000);
         await page.getByRole('link', { name: 'Add New Underwriter' }).click();
         companyName = `Underwriter_${Date.now()}`;
         const phone = `9${Math.floor(100000000 + Math.random() * 900000000)}`;

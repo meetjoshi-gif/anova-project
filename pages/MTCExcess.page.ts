@@ -4,6 +4,7 @@ export class MTCCertificatePage {
   constructor(private page: Page) { }
 
   async navigate() {
+    await this.page.waitForTimeout(5000);
     await this.page.goto('https://newdev.anovamarine.com/revised/admin/new_mtc_excess/index');
   }
 

@@ -21,10 +21,7 @@ export class LoginPage {
     async login(email: string, password: string) {
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
-        await Promise.all([
-            this.page.waitForNavigation({ waitUntil: 'networkidle', timeout: 60000 }),
-            this.loginButton.click()
-        ]);
+        await this.loginButton.click();
     }
 
     async loginWithAdminCredentials() {
