@@ -10,7 +10,7 @@ test.describe.serial('Claims module', () => {
   // Before All
   test.beforeAll(async ({ browser }) => {
 
-    context = await browser.newContext();
+    context = await browser.newContext({ storageState: 'playwright/.auth/user.json' });
     page = await context.newPage();
 
     await page.goto('https://newdev.anovamarine.com/revised/login/index');
@@ -27,7 +27,6 @@ test.describe.serial('Claims module', () => {
   });
 
   test('Test 1 - First-Party Claims Created', async () => {
-    await page.getByRole('link', { name: ' Claims' }).click();
     await page.goto('https://newdev.anovamarine.com/revised/admin/claims/index?pending=1');
     await page.reload();
     await page.getByRole('link', { name: 'Add New Claim' }).click({ timeout: 5000 });

@@ -27,10 +27,13 @@ export default defineConfig({
     ['json', { outputFile: 'test-results/results.json' }],
   ],
   outputDir: 'test-results',
+  globalSetup: './playwright/global-setup',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: process.env.BASE_URL || 'https://newdev.anovamarine.com',
+
+    storageState: 'playwright/.auth/user.json',
 
     /* Collect trace only when retrying a failed test. */
     trace: 'on-first-retry',
@@ -39,8 +42,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
 
     /* Record video on failure */
-    video: 'on-first-retry',
-    
+    video: 'on-first-retry',    
   },
 
   /* Configure projects for major browsers */

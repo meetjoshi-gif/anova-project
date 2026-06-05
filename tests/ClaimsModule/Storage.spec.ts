@@ -233,7 +233,7 @@ test.describe.serial('Storage and Cargo', () => {
   // Before All
   test.beforeAll(async ({ browser }) => {
 
-    context = await browser.newContext();
+    context = await browser.newContext({ storageState: 'playwright/.auth/user.json' });
     page = await context.newPage();
 
     await page.goto('https://newdev.anovamarine.com/revised/login/index');
@@ -243,11 +243,10 @@ test.describe.serial('Storage and Cargo', () => {
     await page.getByRole('textbox', { name: 'Password' }).fill('123456');
 
     await page.getByRole('button', { name: 'Log In' }).click();
-    await page.waitForTimeout(2000);
     console.log('Login Successful for Storage and Cargo Claims');
   });
   test('Allow assigning and rejecting claims', async () => {
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     await page.goto('https://newdev.anovamarine.com/revised/admin/storage_or_cargo_claim_request');
     const randomAction = Math.random() < 0.5 ? 'assign' : 'reject';
 

@@ -11,16 +11,12 @@ test.describe.serial('Broker Flow', () => {
 
     context = await browser.newContext();
     page = await context.newPage();
+     await page.goto('https://newdev.anovamarine.com/revised/login/index');
 
-    await page.goto('https://newdev.anovamarine.com/revised/login/index');
-
-    await page.getByRole('textbox', { name: 'Email' }).fill('keri.anderson97+admin@gmail.com');
-
-    await page.getByRole('textbox', { name: 'Password' }).fill('123456');
-
-    await page.getByRole('button', { name: 'Log In' }).click();
-
-    await page.waitForTimeout(5000);
+        await page.getByRole('textbox', { name: 'Email' }).fill('keri.anderson97+admin@gmail.com');
+        await page.getByRole('textbox', { name: 'Password' }).fill('123456');
+        await page.getByRole('button', { name: 'Log In' }).click();
+    await page.waitForTimeout(3000);
 
     console.log('Login Successful For Brokers Flow');
   });

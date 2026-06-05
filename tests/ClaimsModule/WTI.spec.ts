@@ -147,7 +147,7 @@ test.describe.serial('Claims module WTI', () => {
   // Before All
   test.beforeAll(async ({ browser }) => {
 
-    context = await browser.newContext();
+    context = await browser.newContext({ storageState: 'playwright/.auth/user.json' });
     page = await context.newPage();
 
     await page.goto('https://newdev.anovamarine.com/revised/login/index');

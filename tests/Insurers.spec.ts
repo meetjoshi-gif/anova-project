@@ -1,6 +1,6 @@
 import { test, expect, Browser, BrowserContext, Page } from '@playwright/test';
 
-let browserContext: BrowserContext;
+let context: BrowserContext;
 let page: Page;
 let insurerName: string;
 let phoneNumber: string;
@@ -9,23 +9,20 @@ test.describe.serial('Insurer Module', () => {
 
   test.beforeAll(async ({ browser }) => {
 
-    browserContext = await browser.newContext();
-    page = await browserContext.newPage();
+    context = await browser.newContext();
+    page = await context.newPage();
+         await page.goto('https://newdev.anovamarine.com/revised/login/index');
 
-    await page.goto('https://newdev.anovamarine.com/revised/login/index');
-
-    await page.getByRole('textbox', { name: 'Email' }).fill('keri.anderson97+admin@gmail.com');
-
-    await page.getByRole('textbox', { name: 'Password' }).fill('123456');
-
-    await page.getByRole('button', { name: 'Log In' }).click();
+        await page.getByRole('textbox', { name: 'Email' }).fill('keri.anderson97+admin@gmail.com');
+        await page.getByRole('textbox', { name: 'Password' }).fill('123456');
+        await page.getByRole('button', { name: 'Log In' }).click();
+    await page.waitForTimeout(3000);
     console.log('Login Successful For Insurers Flow');
   });
 
 
   test('Test 1 - Insurers Creation', async () => {
 
-    await page.getByRole('link', { name: ' Users' }).click({ timeout: 5000 });
     await page.goto('https://newdev.anovamarine.com/revised/admin/users_insurers');
 
     // await page.getByRole('link', { name: 'Insurers' }).click();
@@ -134,6 +131,6 @@ test.describe.serial('Insurer Module', () => {
 
   test.afterAll(async () => {
     await page.close();
-    await browserContext.close();
+    await context.close();
   });
 });
