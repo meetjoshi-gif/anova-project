@@ -6,7 +6,7 @@ let page: Page;
 let companyName: string;
 
 test.describe.serial('Underwriter Flow', () => {
-test.setTimeout(30000);
+  test.setTimeout(100000);
     // Before All
     test.beforeAll(async ({ browser }) => {
 

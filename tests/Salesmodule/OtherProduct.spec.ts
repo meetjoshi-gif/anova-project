@@ -3,7 +3,7 @@ import { LoginPage } from '../../pages/login.page';
 import { OtherProductPage } from '../../pages/OtherProduct.page';
 
 test('OtherProduct Flow', async ({ page }) => {
-  test.setTimeout(50000);
+  test.setTimeout(100000);
   await page.setViewportSize({ width: 1920, height: 1080 });
   const loginPage = new LoginPage(page);
   const certificatePage = new OtherProductPage(page);

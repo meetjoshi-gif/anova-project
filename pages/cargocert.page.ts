@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-export class CertificatePage {
+export class CargoCertificatePage {
   constructor(private page: Page) { }
 
   async navigate() {
