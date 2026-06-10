@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/login.page';
 import { CargoCertificatePage } from '../../pages/Cargocert.page';
 
+
 test('Sale and Cargo', async ({ page }) => {
   test.setTimeout(100000);
   await page.setViewportSize({ width: 1920, height: 1080 });
