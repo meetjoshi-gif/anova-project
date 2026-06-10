@@ -4,6 +4,7 @@ export class CertificatePage {
   constructor(private page: Page) { }
 
   async navigate() {
+    await this.page.waitForTimeout(3000)
     await this.page.goto('https://newdev.anovamarine.com/revised/admin/new_certificate/index');
   }
 
@@ -11,7 +12,7 @@ export class CertificatePage {
     const page = this.page;
 
     const pendingText = page.getByText('You have one last pending');
-
+    
     if (await pendingText.isVisible({ timeout: 2000 }).catch(() => false)) {
       await page.getByRole('link', { name: 'Continue' }).click();
     } else {

@@ -11,6 +11,7 @@ test.setTimeout(50000);
 
     // Login
     await loginPage.navigate();
+    await page.waitForTimeout(5000);
     await loginPage.login('keri.anderson97+admin@gmail.com', '123456');
 
     console.log('Login successful For SQP');
