@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/login.page';
-import { CargoCertificatePage } from '../../pages/Cargocert.page';
-
+import { CargoCertificatePage } from '../../pages/Cargo-Certificate.page';
 
 test('Sale and Cargo', async ({ page }) => {
   test.setTimeout(100000);
