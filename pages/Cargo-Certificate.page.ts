@@ -60,7 +60,7 @@ export class CargoCertificatePage {
       await page.getByRole('textbox', { name: 'Goods Type description/letter' }).fill('Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
       await page.getByRole('textbox', { name: 'Extra Condition (Optional)' }).fill('TEST');
       await page.getByRole('link', { name: 'Continue' }).click();
-      await page.getByRole('button', { name: 'Override and Continue' }).click();
+     // await page.getByRole('button', { name: 'Override and Continue' }).click();
       const yesButton = page.getByRole('button', { name: 'Yes' });
 
       if (await yesButton.isVisible({ timeout: 2000 }).catch(() => false)) {
@@ -68,6 +68,7 @@ export class CargoCertificatePage {
       } else {
         await page.getByRole('link', { name: 'Continue' }).click();
       }
+      await page.waitForTimeout(3000);
       //await page.getByRole('button', { name: 'Yes' }).click();
       //await page.getByRole('link', { name: 'Continue' }).click();
 
@@ -94,7 +95,7 @@ export class CargoCertificatePage {
   await page1.getByRole('textbox', { name: 'Insured Value(USD)' }).fill('2');
   await page1.waitForTimeout(2000);  
   await page1.getByRole('link', { name: 'Continue' }).click();
-  await page1.getByRole('button', { name: 'Override and Continue' }).click();
+//   await page1.getByRole('button', { name: 'Override and Continue' }).click();
   await page1.goto('https://newdev.anovamarine.com/revised/admin/new_certificate/review_new_certificate');
   await page1.getByRole('link', { name: 'Continue' }).click();
   await page1.getByRole('textbox', { name: 'Reason' }).fill('Edit the reason ');
