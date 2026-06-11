@@ -35,13 +35,13 @@ export default defineConfig({
     storageState: 'playwright/.auth/user.json',
 
     /* Collect trace only when retrying a failed test. */
-    trace: 'on',
+    trace: 'retain-on-failure',
 
     /* Take screenshot only on failure */
-    screenshot: 'on',
+    screenshot: 'only-on-failure',
 
     /* Record video on failure */
-    video: 'on',    
+    video: 'retain-on-failure',    
   },
 
   /* Configure projects for major browsers */

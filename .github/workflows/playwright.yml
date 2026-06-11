@@ -204,6 +204,10 @@ jobs:
                           <td style="border:1px solid #dddddd;">Skipped</td>
                           <td style="border:1px solid #dddddd;">${{ env.SKIPPED_TESTS }}</td>
                         </tr>
+                                                  <tr>
+                          <td style="border:1px solid #dddddd;">Flaky</td>
+                          <td style="border:1px solid #dddddd;">${{ env.FLAKY_TESTS }}</td>
+                        </tr>
                       </table>
 
                       <h3 style="margin-top:25px;">Reports</h3>
@@ -311,6 +315,10 @@ jobs:
                         <tr>
                           <td style="border:1px solid #dddddd;">Skipped</td>
                           <td style="border:1px solid #dddddd;">${{ env.SKIPPED_TESTS }}</td>
+                        </tr>
+                          <tr>
+                          <td style="border:1px solid #dddddd;">Flaky</td>
+                          <td style="border:1px solid #dddddd;">${{ env.FLAKY_TESTS }}</td>
                         </tr>
                       </table>
 
