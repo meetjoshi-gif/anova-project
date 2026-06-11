@@ -37,8 +37,6 @@ jobs:
              npm ci
              npx playwright install
 
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli       
 
       - name: Run Playwright tests in headless mode
         run: |
@@ -74,18 +72,69 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./reports
 
-      - name: Deploy Report to Netlify
+      - name: Extract Test Statistics
         if: always()
         run: |
-          netlify deploy \
-          --dir=reports \
-          --site=$NETLIFY_SITE_ID \
-          --auth=$NETLIFY_AUTH_TOKEN \
-          --prod
-        env:
-          NETLIFY_AUTH_TOKEN: nfp_kpAxsudkNMY3c8qkMbfBQSN2vScqkBLWbe86
-          NETLIFY_SITE_ID: 8f3ea6ff-e3d0-41bd-b8e6-2bce67fa4470    
-     
+          node -e "
+          const fs = require('fs');
+          const path = 'test-results/results.json';
+          if (!fs.existsSync(path)) {
+            console.error('ERROR: Playwright JSON report not found:', path);
+            process.exit(1);
+          }
+          const report = JSON.parse(fs.readFileSync(path,'utf8'));
+
+          let total = 0, passed = 0, failed = 0, skipped = 0, flaky = 0;
+
+          function processSuite(suite) {
+            if (suite.specs) {
+              for (const spec of suite.specs) {
+                for (const test of spec.tests || []) {
+                  total++;
+                  const status = test.results?.[0]?.status || test.status;
+
+                  if (status === 'passed') passed++;
+                  else if (status === 'failed') failed++;
+                  else if (status === 'skipped') skipped++;
+                  else if (status === 'flaky') flaky++;
+                }
+              }
+            }
+
+            for (const child of suite.suites || []) {
+              processSuite(child);
+            }
+          }
+
+          for (const suite of report.suites || []) {
+            processSuite(suite);
+          }
+
+          fs.appendFileSync(process.env.GITHUB_ENV, \`
+          TOTAL_TESTS=\${total}
+          PASSED_TESTS=\${passed}
+          FAILED_TESTS=\${failed}
+          SKIPPED_TESTS=\${skipped}
+          FLAKY_TESTS=\${flaky}
+          \`);
+          "
+      - name: Print Test Summary
+        if: always()
+        run: |
+          echo "================ Test Summary ================"
+          echo "Total Tests : $TOTAL_TESTS"
+          echo "Passed      : $PASSED_TESTS"
+          echo "Failed      : $FAILED_TESTS"
+          echo "Skipped     : $SKIPPED_TESTS"
+          echo "Flaky       : $FLAKY_TESTS"
+          echo  ""
+          echo "## Playwright Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Total Tests: $TOTAL_TESTS" >> $GITHUB_STEP_SUMMARY
+          echo "- Passed: $PASSED_TESTS" >> $GITHUB_STEP_SUMMARY
+          echo "- Failed: $FAILED_TESTS" >> $GITHUB_STEP_SUMMARY
+          echo "- Skipped: $SKIPPED_TESTS" >> $GITHUB_STEP_SUMMARY
+          echo "- Flaky: $FLAKY_TESTS" >> $GITHUB_STEP_SUMMARY
 
       # ✅ Email PASS
 
@@ -102,41 +151,97 @@ jobs:
           to: meet.joshi@pulsesolutions.net
           cc: ankita.mahadik@pulsesolutions.net
           from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
-          body: |
+          html_body: |
 
-            <h2> Anova - Playwright Automation Test Execution Report</h2>
+              <table width="100%" cellpadding="0" cellspacing="0" style="font-family: Arial, Helvetica, sans-serif; background-color:#f4f6f8; padding:20px;">
+                <tr>
+                  <td align="center">
 
-            <p>Hello Team,</p>
+                <table width="700" cellpadding="0" cellspacing="0" style="background:#ffffff; border:1px solid #dddddd; border-radius:8px;">
 
-            <p>The automated test execution for the <b>Anova</b> project has been completed successfully.</p>
+                  <tr>
+                    <td style="background:#28a745; color:#ffffff; padding:20px; text-align:center;">
+                      <h2 style="margin:0;"> Anova - Playwright Automation Test Execution Report</h2>
+                    </td>
+                  </tr>
 
-            <p><b>Execution Status:</b> PASSED</p>
+                  <tr>
+                    <td style="padding:25px;">
 
-            <h3>Reports</h3>
+                      <p>Hello Team,</p>
 
-            <p>
-            <a href="https://anova-html-report-ce92f9.netlify.app/">
-            View Playwright HTML Report
-            </a>
-            </p>
+                      <p>
+                        The automated test execution for the <strong>Anova</strong> project has been completed successfully.
+                      </p>
 
-            <h3>Execution Artifacts</h3>
+                      <p>
+                        <strong>Execution Status:</strong>
+                        <span style="color:#28a745;">PASSED</span>
+                      </p>
 
-            <p>
-            <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">
-            Download Traces, Videos and Screenshots
-            </a>
-            </p>
+                      <h3 style="border-bottom:1px solid #eeeeee; padding-bottom:8px;">
+                        Test Summary
+                      </h3>
 
-            <p>Please review the report for detailed execution results.</p>
+                      <table width="100%" cellpadding="10" cellspacing="0" style="border-collapse:collapse; border:1px solid #dddddd;">
+                        <tr style="background:#f8f9fa;">
+                          <th align="left" style="border:1px solid #dddddd;">Metric</th>
+                          <th align="left" style="border:1px solid #dddddd;">Count</th>
+                        </tr>
+                        <tr>
+                          <td style="border:1px solid #dddddd;">Total Test Cases Executed</td>
+                          <td style="border:1px solid #dddddd;">${{ env.TOTAL_TESTS }}</td>
+                        </tr>
+                        <tr>
+                          <td style="border:1px solid #dddddd;">Passed</td>
+                          <td style="border:1px solid #dddddd;">${{ env.PASSED_TESTS }}</td>
+                        </tr>
+                        <tr>
+                          <td style="border:1px solid #dddddd;">Failed</td>
+                          <td style="border:1px solid #dddddd;">${{ env.FAILED_TESTS }}</td>
+                        </tr>
+                        <tr>
+                          <td style="border:1px solid #dddddd;">Skipped</td>
+                          <td style="border:1px solid #dddddd;">${{ env.SKIPPED_TESTS }}</td>
+                        </tr>
+                      </table>
 
-            <br>
+                      <h3 style="margin-top:25px;">Reports</h3>
 
-            <p>
-            Best Regards,<br>
-            Meet Joshi<br>
-            QA Automation Engineer
-            </p>
+                      <p>
+                        <a href="https://anova-html-report-ce92f9.netlify.app/" style="color:#0066cc;">
+                          View Playwright HTML Report
+                        </a>
+                      </p>
+
+                      <h3>Execution Artifacts</h3>
+
+                      <p>
+                        <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" style="color:#0066cc;">
+                          Download Traces, Videos and Screenshots
+                        </a>
+                      </p>
+
+                      <p>
+                        Please review the report for detailed execution results.
+                      </p>
+
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="background:#f8f9fa; padding:15px; text-align:center; color:#666666;">
+                      Best Regards,<br>
+                      <strong>Meet Joshi</strong><br>
+                      QA Automation Engineer
+                    </td>
+                  </tr>
+
+                </table>
+
+              </td>
+              </tr>
+                </table>
 
       # ❌ Email FAIL (Detailed)
 
@@ -154,47 +259,105 @@ jobs:
           subject: "Anova | Automation Test Execution Report - Failed"
           to: meet.joshi@pulsesolutions.net
           from: MS_H24YF9@test-86org8emz50gew13.mlsender.net
-          body: |
+          html_body: |
 
-            Anova - Playwright Automation Test Execution Report - Failed
+              <table width="100%" cellpadding="0" cellspacing="0" style="font-family: Arial, Helvetica, sans-serif; background-color:#f4f6f8; padding:20px;">
+                <tr>
+                  <td align="center">
 
-            📊 Summary:
-                <h2> Anova - Playwright Automation Test Execution Report</h2>
+                <table width="700" cellpadding="0" cellspacing="0" style="background:#ffffff; border:1px solid #dddddd; border-radius:8px;">
 
-            <p>Hello Team,</p>
+                  <tr>
+                    <td style="background:#dc3545; color:#ffffff; padding:20px; text-align:center;">
+                      <h2 style="margin:0;"> Anova - Playwright Automation Test Execution Report</h2>
+                    </td>
+                  </tr>
 
-            <p>The automated test execution for the <b>Anova</b> project has completed with failures.</p>
+                  <tr>
+                    <td style="padding:25px;">
 
-            <p><b>Execution Status:</b> FAILED</p>
+                      <p>Hello Team,</p>
 
-            <p>
-            One or more test cases failed during execution.
-            Please review the report and execution artifacts for failure analysis.
-            </p>
+                      <p>
+                        The automated test execution for the <strong>Anova</strong> project has completed with failures.
+                      </p>
 
-            <h3>Reports</h3>
+                      <p>
+                        <strong>Execution Status:</strong>
+                        <span style="color:#dc3545;">FAILED</span>
+                      </p>
 
-            <p>
-            <a href="https://anova-html-report-ce92f9.netlify.app/">
-            View Playwright HTML Report
-            </a>
-            </p>
+                      <h3 style="border-bottom:1px solid #eeeeee; padding-bottom:8px;">
+                        Test Summary
+                      </h3>
 
-            <h3>Execution Artifacts</h3>
+                      <table width="100%" cellpadding="10" cellspacing="0" style="border-collapse:collapse; border:1px solid #dddddd;">
+                        <tr style="background:#f8f9fa;">
+                          <th align="left" style="border:1px solid #dddddd;">Metric</th>
+                          <th align="left" style="border:1px solid #dddddd;">Count</th>
+                        </tr>
+                        <tr>
+                          <td style="border:1px solid #dddddd;">Total Test Cases Executed</td>
+                          <td style="border:1px solid #dddddd;">${{ env.TOTAL_TESTS }}</td>
+                        </tr>
+                        <tr>
+                          <td style="border:1px solid #dddddd;">Passed</td>
+                          <td style="border:1px solid #dddddd;">${{ env.PASSED_TESTS }}</td>
+                        </tr>
+                        <tr>
+                          <td style="border:1px solid #dddddd;">Failed</td>
+                          <td style="border:1px solid #dddddd;">${{ env.FAILED_TESTS }}</td>
+                        </tr>
+                        <tr>
+                          <td style="border:1px solid #dddddd;">Skipped</td>
+                          <td style="border:1px solid #dddddd;">${{ env.SKIPPED_TESTS }}</td>
+                        </tr>
+                      </table>
 
-            <p>
-            <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">
-            Download Traces, Videos and Screenshots
-            </a>
-            </p>
+                      <br>
 
-            <br>
+                      <div style="background:#fff3f3; border-left:4px solid #dc3545; padding:15px;">
+                        <strong>Failure Details</strong><br><br>
+                        One or more test cases failed during execution.
+                        Please review the detailed report and execution artifacts for failure analysis.
+                      </div>
 
-            <p>
-            Best Regards,<br>
-            Meet Joshi<br>
-            QA Automation Engineer
-            </p>
+                      <h3 style="margin-top:25px;">Reports</h3>
+
+                      <p>
+                        <a href="https://anova-html-report-ce92f9.netlify.app/" style="color:#0066cc;">
+                          View Playwright HTML Report
+                        </a>
+                      </p>
+
+                      <h3>Execution Artifacts</h3>
+
+                      <p>
+                        <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" style="color:#0066cc;">
+                          Download Traces, Videos, Screenshots and Logs
+                        </a>
+                      </p>
+
+                      <p>
+                        Please review the failed test cases and take the necessary action.
+                      </p>
+
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="background:#f8f9fa; padding:15px; text-align:center; color:#666666;">
+                      Best Regards,<br>
+                      <strong>Meet Joshi</strong><br>
+                      QA Automation Engineer
+                    </td>
+                  </tr>
+
+                </table>
+
+                </td>
+              </tr>
+                </table>
 
 
            

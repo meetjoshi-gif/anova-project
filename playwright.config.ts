@@ -23,8 +23,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html', { outputFolder: 'reports', open: 'never' }],
-    ['json', { outputFile: 'test-results/results.json' }],
+    ['html', { outputFolder: 'reports', open: 'never' }],  ['json', { outputFile: 'test-results/results.json' }],
   ],
   outputDir: 'test-results',
   globalSetup: './playwright/global-setup',
@@ -36,13 +35,13 @@ export default defineConfig({
     storageState: 'playwright/.auth/user.json',
 
     /* Collect trace only when retrying a failed test. */
-    trace: 'on-first-retry',
+    trace: 'on',
 
     /* Take screenshot only on failure */
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
 
     /* Record video on failure */
-    video: 'on-first-retry',    
+    video: 'on',    
   },
 
   /* Configure projects for major browsers */
