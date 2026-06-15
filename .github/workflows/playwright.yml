@@ -91,12 +91,22 @@ jobs:
               for (const spec of suite.specs) {
                 for (const test of spec.tests || []) {
                   total++;
-                  const status = test.results?.[0]?.status || test.status;
+                  
+                  // Check if test has multiple results (indicates flaky)
+                  const results = test.results || [];
+                  const hasMultipleResults = results.length > 1;
+                  const lastResult = results[results.length - 1];
+                  const status = lastResult?.status || test.status;
 
-                  if (status === 'passed') passed++;
-                  else if (status === 'failed') failed++;
-                  else if (status === 'skipped') skipped++;
-                  else if (status === 'flaky') flaky++;
+                  if (status === 'skipped') {
+                    skipped++;
+                  } else if (hasMultipleResults && status === 'passed') {
+                    flaky++;
+                  } else if (status === 'passed') {
+                    passed++;
+                  } else if (status === 'failed') {
+                    failed++;
+                  }
                 }
               }
             }
