@@ -1,0 +1,422 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Salesmodule/Highvaule.spec.ts >> High Vaule Flow
+- Location: tests/Salesmodule/Highvaule.spec.ts:6:5
+
+# Error details
+
+```
+Test timeout of 100000ms exceeded.
+```
+
+```
+Error: locator.check: Test timeout of 100000ms exceeded.
+Call log:
+  - waiting for getByRole('radio', { name: 'No' })
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - text: 
+        - link "Logo" [ref=e7] [cursor=pointer]:
+          - /url: https://newdev.anovamarine.com/revised/admin/
+          - img "Logo" [ref=e8]
+      - generic [ref=e10]:
+        - generic [ref=e13]:
+          - generic [ref=e15] [cursor=pointer]:
+            - img "United States" [ref=e16]
+            - text: EN 
+          - generic [ref=e19] [cursor=pointer]: 
+          - generic [ref=e22] [cursor=pointer]: 
+          - generic [ref=e23]:
+            - generic [ref=e24]: Anova Admin
+            - generic [ref=e26] [cursor=pointer]: 
+        - text: 
+    - generic [ref=e27]:
+      - list [ref=e31]:
+        - listitem [ref=e32]:
+          - link " Dashboard" [ref=e33] [cursor=pointer]:
+            - /url: https://newdev.anovamarine.com/revised/admin/index
+            - generic [ref=e34]: 
+            - generic [ref=e35]: Dashboard
+        - listitem [ref=e36]:
+          - link " Users" [ref=e37] [cursor=pointer]:
+            - /url: javascript:void(0)
+            - generic [ref=e38]: 
+            - generic [ref=e39]: Users
+        - listitem [ref=e40]:
+          - link " Claims" [ref=e41] [cursor=pointer]:
+            - /url: javascript:void(0);
+            - generic [ref=e42]: 
+            - generic [ref=e43]: Claims
+        - listitem [ref=e44]:
+          - link " Sales" [ref=e45] [cursor=pointer]:
+            - /url: javascript:void(0);
+            - generic [ref=e46]: 
+            - generic [ref=e47]: Sales
+        - listitem [ref=e48]:
+          - link " LC Requests" [ref=e49] [cursor=pointer]:
+            - /url: javascript:void(0);
+            - generic [ref=e50]: 
+            - generic [ref=e51]: LC Requests
+        - listitem [ref=e52]:
+          - link " Cert Riders 116" [ref=e53] [cursor=pointer]:
+            - /url: https://newdev.anovamarine.com/revised/admin/cert_riders/index
+            - generic [ref=e54]: 
+            - generic [ref=e55]: Cert Riders
+            - generic [ref=e56]: "116"
+        - listitem [ref=e57]:
+          - link " Accounting" [ref=e58] [cursor=pointer]:
+            - /url: https://newdev.anovamarine.com/revised/admin/accounting/index
+            - generic [ref=e59]: 
+            - generic [ref=e60]: Accounting
+        - listitem [ref=e61]:
+          - link " Reports" [ref=e62] [cursor=pointer]:
+            - /url: javascript:void(0);
+            - generic [ref=e63]: 
+            - generic [ref=e64]: Reports
+        - listitem [ref=e65]:
+          - link " LC Reports" [ref=e66] [cursor=pointer]:
+            - /url: javascript:void(0);
+            - generic [ref=e67]: 
+            - generic [ref=e68]: LC Reports
+        - listitem [ref=e69]:
+          - link " Anova AI" [ref=e70] [cursor=pointer]:
+            - /url: javascript:void(0);
+            - generic [ref=e71]: 
+            - generic [ref=e72]: Anova AI
+      - generic [ref=e74]:
+        - generic [ref=e76]:
+          - generic [ref=e80]:
+            - heading "Create New MTC Excess - Step 2 - Review" [level=1] [ref=e81]
+            - list [ref=e82]:
+              - listitem [ref=e83]:
+                - link "Dashboard" [ref=e84] [cursor=pointer]:
+                  - /url: https://newdev.anovamarine.com/revised/admin/index
+              - listitem [ref=e85]
+              - listitem [ref=e87]:
+                - link "Sales" [ref=e88] [cursor=pointer]:
+                  - /url: https://newdev.anovamarine.com/revised/admin/sales/index
+              - listitem [ref=e89]
+              - listitem [ref=e91]: Create New MTC Excess - Step 2 - Review
+          - generic [ref=e95]:
+            - generic [ref=e96]:
+              - generic [ref=e97]:
+                - heading "Step 2 of 3" [level=3] [ref=e98]
+                - heading "01 Info" [level=3] [ref=e99]
+                - progressbar [ref=e101]
+              - generic [ref=e102]:
+                - heading "02 Review" [level=3] [ref=e103]
+                - progressbar [ref=e105]
+              - heading "03 Finalize" [level=3] [ref=e107]
+              - alert [ref=e110]: You have one last pending certificate to be continue.
+            - generic [ref=e111]:
+              - generic [ref=e112]:
+                - generic [ref=e113]:
+                  - heading "Beneficiary" [level=3] [ref=e114]
+                  - generic [ref=e115]:
+                    - generic [ref=e116]: Name
+                    - generic [ref=e117]: keri logistiq
+                  - generic [ref=e118]:
+                    - generic [ref=e119]: Phone
+                    - generic [ref=e120]: "-"
+                  - generic [ref=e121]:
+                    - generic [ref=e122]: Address
+                    - generic [ref=e123]:
+                      - text: United States
+                      - text: Test 1
+                      - text: NY, New York, 123455
+                - generic [ref=e124]:
+                  - heading "Shipment" [level=3] [ref=e125]
+                  - generic [ref=e126]:
+                    - generic [ref=e127]: Transportation
+                    - generic [ref=e128]: Road
+                  - generic [ref=e129]:
+                    - generic [ref=e130]: Sailing/Shipping Date
+                    - generic [ref=e131]: 06/24/2026
+                  - generic [ref=e132]:
+                    - generic [ref=e133]: "BL or Shipping Document #"
+                    - generic [ref=e134]: "3243"
+                  - generic [ref=e135]:
+                    - generic [ref=e136]: "Reference #"
+                    - generic [ref=e137]: "-"
+                  - generic [ref=e138]:
+                    - generic [ref=e139]: Carrier
+                    - generic [ref=e140]: "34534543"
+                  - generic [ref=e141]:
+                    - generic [ref=e142]: Origin
+                    - generic [ref=e143]: Canada, test
+                  - generic [ref=e144]:
+                    - generic [ref=e145]: Destination
+                    - generic [ref=e146]: Canada, test
+                - generic [ref=e147]:
+                  - heading "Insured Value and Commodity" [level=3] [ref=e148]
+                  - generic [ref=e149]:
+                    - generic [ref=e150]: Goods Type
+                    - generic [ref=e151]: General Goods
+                  - generic [ref=e152]:
+                    - generic [ref=e153]: Value of goods
+                    - generic [ref=e154]: $1.00
+              - link "Edit Information" [ref=e157] [cursor=pointer]:
+                - /url: https://newdev.anovamarine.com/revised/admin/new_mtc_excess
+              - generic [ref=e160]:
+                - generic [ref=e161]:
+                  - heading "Rates & Conditions" [level=3] [ref=e162]
+                  - paragraph [ref=e163]: Below are the rates, premiums, and, if applicable, taxes and fees for generating this certificate. By proceeding, you certify that you are authorized on behalf of the assured party and agree to pay the below amount for this certificate. Please verify for accuracy all details and if you have any questions please contact your Anova representative. We thank you for your business and for choosing to experience the Anova Difference.
+                - generic [ref=e166]:
+                  - checkbox "Edit Rate" [ref=e167]
+                  - generic [ref=e168]: Edit Rate
+                - generic [ref=e170]:
+                  - heading "Premium" [level=3] [ref=e172]
+                  - generic [ref=e175]:
+                    - generic [ref=e176]: $
+                    - textbox "0.00" [ref=e177]: "30.00"
+                - generic [ref=e179]:
+                  - heading "Deductible" [level=3] [ref=e181]
+                  - generic [ref=e182]:
+                    - generic [ref=e183]:
+                      - heading "Flat Rate" [level=3] [ref=e185]
+                      - generic [ref=e187]:
+                        - combobox [ref=e188]
+                        - combobox "N/A" [ref=e191] [cursor=pointer]:
+                          - textbox "N/A" [ref=e192]
+                    - generic [ref=e193]:
+                      - heading "Percentage" [level=3] [ref=e195]
+                      - generic [ref=e197]:
+                        - combobox [ref=e198]
+                        - combobox "N/A" [ref=e201] [cursor=pointer]:
+                          - textbox "N/A" [ref=e202]
+                - generic [ref=e205]:
+                  - heading "Conditions and Restrictions" [level=3] [ref=e206]
+                  - paragraph [ref=e207]: This certificate is subject to the terms and conditions of the the master policy under which it was issued. All specific commodity conditions, warranties, terms and restrictions communicated by Anova staff or underwriters are applicable. This includes any deductibles or special instructions for your particular shipment. It is your duty to communicate these restrictions to the assured party if you are acting on their behalf. All premiums are due and payable in the period specified on the invoice and/or specified by Anova. If you incorrectly issue a certificate, coverage is deemed void. Should any liabilities arise if you incorrectly issue a certificate, you agree to be responsible for any costs, liability, and/or penalties resulting therefrom. You agree to comply with any applicable laws and/or regulations. Any disputes arising from this shall be resolved as specified on the certificate of insurance.
+              - generic [ref=e209]:
+                - link "Cancel" [ref=e211] [cursor=pointer]:
+                  - /url: javascript:void(0)
+                - link "Back" [ref=e213] [cursor=pointer]:
+                  - /url: https://newdev.anovamarine.com/revised/admin/new_certificate
+                - link "Save for Later" [ref=e215] [cursor=pointer]:
+                  - /url: javascript:void(0);
+                - link "Continue" [ref=e217] [cursor=pointer]:
+                  - /url: javascript:void(0);
+        - generic [ref=e221]: © 2026 Anova Marine | All rights reserved.
+  - text: 
+```
+
+# Test source
+
+```ts
+  5   | export class HighVauleRequestPage {
+  6   |     constructor(private page: Page) { }
+  7   | 
+  8   |     async navigate() {
+  9   |         await this.page.waitForTimeout(3000);
+  10  |         await this.page.goto('https://newdev.anovamarine.com/revised/admin/new_mtc_excess/index');
+  11  |     }
+  12  | 
+  13  |     async CreateHVR() {
+  14  |         const page = this.page
+  15  |         await page.waitForTimeout(2000);
+  16  |         await this.page.goto('https://newdev.anovamarine.com/revised/admin/new_mtc_excess/index');
+  17  | 
+  18  |         const pendingText = page.getByText('You have one last pending');
+  19  | 
+  20  |         if (await pendingText.isVisible({ timeout: 2000 }).catch(() => false)) {
+  21  |             await page.getByRole('radio', { name: 'No' }).check();
+  22  |             await page.getByRole('combobox', { name: 'Select Option' }).first().click();
+  23  |             await page.getByRole('option', { name: 'Fully boxed and palletized' }).click();
+  24  |             await page.getByRole('combobox', { name: 'Select Option' }).click();
+  25  |             await page.getByRole('option', { name: 'Electronics of high value' }).click();
+  26  |             await page.getByRole('textbox', { name: 'Please describe the goods and' }).fill('TETST');
+  27  |             const filePath = path.join(process.cwd(), 'uploads', 'images.png');
+  28  |             await page.getByRole('button', { name: 'Photo of a Cargo' }).setInputFiles(filePath);
+  29  |             await page.getByRole('checkbox', { name: 'I warrant the above answers' }).check();
+  30  |             await page.getByRole('link', { name: 'Submit Special Approval' }).click();
+  31  |             await page.goto('https://newdev.anovamarine.com/revised/admin/high_value_requests/index');
+  32  | 
+  33  |         }
+  34  |         else {
+  35  | 
+  36  |             await page.getByRole('combobox', { name: 'Select Client' }).click();
+  37  |             await page.getByRole('option', { name: 'Keri Anderson Client Company' }).click();
+  38  | 
+  39  |             await page.getByRole('textbox', { name: 'Name', exact: true }).fill('John Doe');
+  40  |             await page.getByRole('textbox', { name: 'Phone' }).fill('9874561230');
+  41  | 
+  42  |             await page.getByRole('combobox', { name: 'Select Country' }).first().click();
+  43  |             await page.getByRole('option', { name: 'Canada' }).click();
+  44  | 
+  45  |             await page.getByRole('textbox', { name: 'Address Line 1' }).fill('47 W 13th St');
+  46  |             await page.getByRole('textbox', { name: 'City', exact: true }).fill('New York');
+  47  |             await page.getByRole('textbox', { name: 'State' }).fill('NY');
+  48  |             await page.getByRole('textbox', { name: 'Postal Code' }).fill('10011');
+  49  | 
+  50  |             await page.getByRole('textbox', { name: 'BL or Shipping Document #' }).fill('BL');
+  51  |             await page.getByRole('textbox', { name: 'Reference #' }).fill('Reference');
+  52  | 
+  53  |             await page.getByRole('combobox', { name: 'Select Country' }).nth(1).click();
+  54  |             await page.getByRole('option', { name: 'United States' }).click();
+  55  | 
+  56  |             await page.getByRole('combobox', { name: 'Select Country' }).click();
+  57  |             await page.getByRole('option', { name: 'United States' }).click();
+  58  |             await page.getByRole('textbox', { name: 'Origin Address' }).fill('Origin Addres');
+  59  | 
+  60  |             await page.getByRole('combobox', { name: 'Select Origin State' }).click();
+  61  |             await page.getByRole('option', { name: 'Arkansas' }).click();
+  62  |             await page.getByRole('textbox', { name: 'Origin Postal Code' }).fill('92000');
+  63  | 
+  64  |             await page.getByRole('textbox', { name: 'Origin City' }).fill('CITY');
+  65  |             await page.getByRole('textbox', { name: 'Carrier' }).fill('TEST Carrier');
+  66  |             await page.getByRole('combobox', { name: 'Select Destination State' }).click();
+  67  |             await page.getByRole('option', { name: 'Arkansas' }).click();
+  68  | 
+  69  |             await page.getByRole('textbox', { name: 'Destination Address' }).fill('Des address');
+  70  |             await page.getByRole('textbox', { name: 'Destination City' }).fill('DEs City');
+  71  |             await page.getByRole('textbox', { name: 'Destination Postal Code' }).fill('96582');
+  72  | 
+  73  | 
+  74  |             await page.getByRole('combobox', { name: 'Select Commodity' }).click();
+  75  |             await page.getByRole('option', { name: 'Mobile Phones & Laptops' }).click();
+  76  | 
+  77  |             await page.getByRole('textbox', { name: 'Insured Value(USD)' }).fill('5000000');
+  78  |             await page.getByRole('textbox', { name: 'Goods Type description/letter' }).fill('Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+  79  |             await page.getByRole('textbox', { name: 'Extra Condition (Optional)' }).fill('TEST');
+  80  |             await page.getByRole('link', { name: 'Continue' }).click();
+  81  |             await page.waitForTimeout(2000)
+  82  |             await page.getByRole('button', { name: 'Override and Continue' }).click();
+  83  |             await page.reload();
+  84  |             await page.getByRole('radio', { name: 'No' }).check();
+  85  |             await page.getByRole('combobox', { name: 'Select Option' }).first().click();
+  86  |             await page.getByRole('option', { name: 'Fully boxed and palletized' }).click();
+  87  |             await page.getByRole('combobox', { name: 'Select Option' }).click();
+  88  |             await page.getByRole('option', { name: 'Electronics of high value' }).click();
+  89  |             await page.getByRole('textbox', { name: 'Please describe the goods and' }).click();
+  90  |             await page.getByRole('textbox', { name: 'Please describe the goods and' }).fill('TETST');
+  91  |             const filePath = path.join(process.cwd(), 'uploads', 'images.png');
+  92  |             await page.getByRole('button', { name: 'Photo of a Cargo' }).setInputFiles(filePath);
+  93  |             await page.getByRole('checkbox', { name: 'I warrant the above answers' }).check();
+  94  |             await page.getByRole('link', { name: 'Submit Special Approval' }).click();
+  95  |         }
+  96  |     }
+  97  |     async CreateHVRLogistiq() {
+  98  |         const page = this.page
+  99  |         await page.waitForTimeout(2000);
+  100 |         await this.page.goto('https://newdev.anovamarine.com/revised/admin/new_mtc_excess/index');
+  101 | 
+  102 |         const pendingText = page.getByText('You have one last pending');
+  103 | 
+  104 |         if (await pendingText.isVisible({ timeout: 2000 }).catch(() => false)) {
+> 105 |             await page.getByRole('radio', { name: 'No' }).check();
+      |                                                           ^ Error: locator.check: Test timeout of 100000ms exceeded.
+  106 |             await page.getByRole('combobox', { name: 'Select Option' }).first().click();
+  107 |             await page.getByRole('option', { name: 'Fully boxed and palletized' }).click();
+  108 |             await page.getByRole('combobox', { name: 'Select Option' }).click();
+  109 |             await page.getByRole('option', { name: 'Electronics of high value' }).click();
+  110 |             await page.getByRole('textbox', { name: 'Please describe the goods and' }).fill('TETST');
+  111 |             const filePath = path.join(process.cwd(), 'uploads', 'images.png');
+  112 |             await page.getByRole('button', { name: 'Photo of a Cargo' }).setInputFiles(filePath);
+  113 |             await page.getByRole('checkbox', { name: 'I warrant the above answers' }).check();
+  114 |             await page.getByRole('link', { name: 'Submit Special Approval' }).click();
+  115 |             await page.goto('https://newdev.anovamarine.com/revised/admin/high_value_requests/index');
+  116 | 
+  117 |         }
+  118 |         else {
+  119 | 
+  120 |             await page.getByRole('combobox', { name: 'Anova' }).click();
+  121 |             await page.getByRole('option', { name: 'Logistiq' }).click();
+  122 |             await page.getByRole('combobox', { name: 'Select Client' }).click();
+  123 |             await page.getByRole('option', { name: 'Keri Anderson Client Logistiq' }).click();
+  124 |             await page.getByRole('textbox', { name: 'Name', exact: true }).fill('John Doe');
+  125 |             await page.getByRole('textbox', { name: 'Phone' }).fill('9874561230');
+  126 | 
+  127 |             await page.getByRole('combobox', { name: 'Select Country' }).first().click();
+  128 |             await page.getByRole('option', { name: 'Canada' }).click();
+  129 | 
+  130 |             await page.getByRole('textbox', { name: 'Address Line 1' }).fill('47 W 13th St');
+  131 |             await page.getByRole('textbox', { name: 'City', exact: true }).fill('New York');
+  132 |             await page.getByRole('textbox', { name: 'State' }).fill('NY');
+  133 |             await page.getByRole('textbox', { name: 'Postal Code' }).fill('10011');
+  134 | 
+  135 |             await page.getByRole('textbox', { name: 'BL or Shipping Document #' }).fill('BL');
+  136 |             await page.getByRole('textbox', { name: 'Reference #' }).fill('Reference');
+  137 | 
+  138 |             await page.getByRole('combobox', { name: 'Select Country' }).nth(1).click();
+  139 |             await page.getByRole('option', { name: 'United States' }).click();
+  140 | 
+  141 |             await page.getByRole('combobox', { name: 'Select Country' }).click();
+  142 |             await page.getByRole('option', { name: 'United States' }).click();
+  143 |             await page.getByRole('textbox', { name: 'Origin Address' }).fill('Origin Addres');
+  144 | 
+  145 |             await page.getByRole('combobox', { name: 'Select Origin State' }).click();
+  146 |             await page.getByRole('option', { name: 'Arkansas' }).click();
+  147 |             await page.getByRole('textbox', { name: 'Origin Postal Code' }).fill('92000');
+  148 | 
+  149 |             await page.getByRole('textbox', { name: 'Origin City' }).fill('CITY');
+  150 |             await page.getByRole('textbox', { name: 'Carrier' }).fill('TEST Carrier');
+  151 |             await page.getByRole('combobox', { name: 'Select Destination State' }).click();
+  152 |             await page.getByRole('option', { name: 'Arkansas' }).click();
+  153 | 
+  154 |             await page.getByRole('textbox', { name: 'Destination Address' }).fill('Des address');
+  155 |             await page.getByRole('textbox', { name: 'Destination City' }).fill('DEs City');
+  156 |             await page.getByRole('textbox', { name: 'Destination Postal Code' }).fill('96582');
+  157 | 
+  158 | 
+  159 |             await page.getByRole('combobox', { name: 'Select Commodity' }).click();
+  160 |             await page.getByRole('option', { name: 'Mobile Phones & Laptops' }).click();
+  161 | 
+  162 |             await page.getByRole('textbox', { name: 'Insured Value(USD)' }).fill('5000000');
+  163 |             await page.getByRole('textbox', { name: 'Goods Type description/letter' }).fill('Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+  164 |             await page.getByRole('textbox', { name: 'Extra Condition (Optional)' }).fill('TEST');
+  165 |             await page.getByRole('link', { name: 'Continue' }).click();
+  166 |             await page.waitForTimeout(2000)
+  167 |             await page.getByRole('button', { name: 'Override and Continue' }).click();
+  168 |             await page.reload();
+  169 |             await page.getByRole('radio', { name: 'No' }).check();
+  170 |             await page.getByRole('combobox', { name: 'Select Option' }).first().click();
+  171 |             await page.getByRole('option', { name: 'Fully boxed and palletized' }).click();
+  172 |             await page.getByRole('combobox', { name: 'Select Option' }).click();
+  173 |             await page.getByRole('option', { name: 'Electronics of high value' }).click();
+  174 |             await page.getByRole('textbox', { name: 'Please describe the goods and' }).click();
+  175 |             await page.getByRole('textbox', { name: 'Please describe the goods and' }).fill('TETST');
+  176 |             const filePath = path.join(process.cwd(), 'uploads', 'images.png');
+  177 |             await page.getByRole('button', { name: 'Photo of a Cargo' }).setInputFiles(filePath);
+  178 |             await page.getByRole('checkbox', { name: 'I warrant the above answers' }).check();
+  179 |             await page.getByRole('link', { name: 'Submit Special Approval' }).click();
+  180 |         }
+  181 |     }
+  182 |     async DownloadHVR() {
+  183 |         const page = this.page
+  184 |         await page.goto('https://newdev.anovamarine.com/revised/admin/high_value_requests/index');
+  185 | 
+  186 |         //Download The HVR
+  187 |         await page.locator('.btn.btn-sm.btn-icon').first().click();
+  188 |         const downloadPromise = page.waitForEvent('download');
+  189 |         await page.getByRole('link', { name: 'Download' }).click();
+  190 |         const download = await downloadPromise;
+  191 |     }
+  192 | 
+  193 |     async ApproveandReject() {
+  194 |         const page = this.page
+  195 | 
+  196 |         await page.locator('.btn.btn-sm.btn-icon').first().click();
+  197 |         await page.getByRole('link', { name: 'View' }).click();
+  198 |         await page.reload();
+  199 | 
+  200 |         const randomAction = Math.random() < 0.5;
+  201 | 
+  202 |         if (randomAction) {
+  203 |             await page.getByRole('link', { name: 'Approve' }).click();
+  204 |             await page.getByRole('button', { name: 'Yes' }).click();
+  205 |             await page.getByRole('button', { name: 'Okay' }).click();
+```
