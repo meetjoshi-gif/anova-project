@@ -37,31 +37,14 @@ jobs:
              npm ci
              npx playwright install
 
+      # - name: Install Netlify CLI
+      #   run: npm install -g netlify-cli       
 
       - name: Run Playwright tests in headless mode
         run: |
-          START_TIME=$(date +%s)
-          echo "TEST_START_TIME=$START_TIME" >> $GITHUB_ENV
-          set +e
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npx playwright test
-          STATUS=$?
-          END_TIME=$(date +%s)
-          echo "TEST_END_TIME=$END_TIME" >> $GITHUB_ENV
-          ELAPSED=$((END_TIME - START_TIME))
-          HOURS=$((ELAPSED / 3600))
-          MINUTES=$(((ELAPSED % 3600) / 60))
-          SECONDS=$((ELAPSED % 60))
-          if [ "$HOURS" -gt 0 ]; then
-            EXECUTION_TIME="${HOURS}h ${MINUTES}m ${SECONDS}s"
-          else
-            EXECUTION_TIME="${MINUTES}m ${SECONDS}s"
-          fi
-          echo "EXECUTION_TIME=$EXECUTION_TIME" >> $GITHUB_ENV
-          exit $STATUS
         env:
           CI: true
-
-
 
       # ✅ Upload HTML Report
       - name: Upload Playwright Report
@@ -69,6 +52,23 @@ jobs:
         with:
           name: playwright-report
           path: reports/
+
+      # ✅ Upload Allure Results & Report
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: allure-results/
+        continue-on-error: true
+
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report
+          path: allure-report/
+        continue-on-error: true
 
       # ✅ Upload Traces, Videos, Screenshots
 
@@ -79,14 +79,6 @@ jobs:
           path: test-results/
 
 
-      # ✅ Deploy HTML Report (Public)
-
-      - name: Deploy Report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./reports
 
       - name: Extract Test Statistics
         if: always()
@@ -94,33 +86,28 @@ jobs:
           node -e "
           const fs = require('fs');
           const path = 'test-results/results.json';
+          if (!fs.existsSync(path)) {
+            console.error('ERROR: Playwright JSON report not found:', path);
+            process.exit(1);
+          }
+          const report = JSON.parse(fs.readFileSync(path,'utf8'));
+
           let total = 0, passed = 0, failed = 0, skipped = 0, flaky = 0;
 
-          if (fs.existsSync(path)) {
-            const report = JSON.parse(fs.readFileSync(path,'utf8'));
+          function processSuite(suite) {
+            if (suite.specs) {
+              for (const spec of suite.specs) {
+                for (const test of spec.tests || []) {
+                  total++;
+                  const status = test.results?.[0]?.status || test.status;
 
-            function processSuite(suite) {
-              if (suite.specs) {
-                for (const spec of suite.specs) {
-                  for (const test of spec.tests || []) {
-                    total++;
-                    const results = test.results || [];
-                    const lastResult = results[results.length - 1] || {};
-                    const status = lastResult.status || test.status;
-
-                    if (results.length > 1) {
-                      flaky++;
-                    }
-                    if (status === 'skipped') {
-                      skipped++;
-                    } else if (status === 'passed') {
-                      passed++;
-                    } else if (status === 'failed') {
-                      failed++;
-                    }
-                  }
+                  if (status === 'passed') passed++;
+                  else if (status === 'failed') failed++;
+                  else if (status === 'skipped') skipped++;
+                  else if (status === 'flaky') flaky++;
                 }
               }
+            }
 
             for (const child of suite.suites || []) {
               processSuite(child);
@@ -131,34 +118,44 @@ jobs:
             processSuite(suite);
           }
 
-          const passPercentage = total ? Math.round((passed / total) * 100) : 0;
-          fs.appendFileSync(process.env.GITHUB_ENV, `TOTAL_TESTS=${total}\nPASSED_TESTS=${passed}\nFAILED_TESTS=${failed}\nSKIPPED_TESTS=${skipped}\nFLAKY_TESTS=${flaky}\nPASS_PERCENTAGE=${passPercentage}\n`);
+          fs.appendFileSync(process.env.GITHUB_ENV, \`
+          TOTAL_TESTS=\${total}
+          PASSED_TESTS=\${passed}
+          FAILED_TESTS=\${failed}
+          SKIPPED_TESTS=\${skipped}
+          FLAKY_TESTS=\${flaky}
+          \`);
           "
       - name: Print Test Summary
         if: always()
         run: |
           echo "================ Test Summary ================"
-          echo "Metric                           Count"
-          echo "---------------------------------------"
-          echo "Total Test Cases Executed       : $TOTAL_TESTS"
-          echo "Passed                          : $PASSED_TESTS"
-          echo "Failed                          : $FAILED_TESTS"
-          echo "Skipped                         : $SKIPPED_TESTS"
-          echo "Flaky                           : $FLAKY_TESTS"
-          echo "Pass Percentage                 : $PASS_PERCENTAGE%"
-          echo "Execution Time                  : $EXECUTION_TIME"
+          echo "Total Tests : $TOTAL_TESTS"
+          echo "Passed      : $PASSED_TESTS"
+          echo "Failed      : $FAILED_TESTS"
+          echo "Skipped     : $SKIPPED_TESTS"
+          echo "Flaky       : $FLAKY_TESTS"
           echo  ""
           echo "## Playwright Test Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
-          echo "| --- | ---: |" >> $GITHUB_STEP_SUMMARY
-          echo "| Total Test Cases Executed | $TOTAL_TESTS |" >> $GITHUB_STEP_SUMMARY
-          echo "| Passed | $PASSED_TESTS |" >> $GITHUB_STEP_SUMMARY
-          echo "| Failed | $FAILED_TESTS |" >> $GITHUB_STEP_SUMMARY
-          echo "| Skipped | $SKIPPED_TESTS |" >> $GITHUB_STEP_SUMMARY
-          echo "| Flaky | $FLAKY_TESTS |" >> $GITHUB_STEP_SUMMARY
-          echo "| Pass Percentage | $PASS_PERCENTAGE% |" >> $GITHUB_STEP_SUMMARY
-          echo "| Execution Time | $EXECUTION_TIME |" >> $GITHUB_STEP_SUMMARY
+          echo "- Total Tests: $TOTAL_TESTS" >> $GITHUB_STEP_SUMMARY
+          echo "- Passed: $PASSED_TESTS" >> $GITHUB_STEP_SUMMARY
+          echo "- Failed: $FAILED_TESTS" >> $GITHUB_STEP_SUMMARY
+          echo "- Skipped: $SKIPPED_TESTS" >> $GITHUB_STEP_SUMMARY
+          echo "- Flaky: $FLAKY_TESTS" >> $GITHUB_STEP_SUMMARY
+      # # - name: Deploy Report to Netlify
+
+       
+      # #   run: |
+      # #     netlify deploy \
+      # #     --dir=reports \
+      # #     --site=$NETLIFY_SITE_ID \
+      # #     --auth=$NETLIFY_AUTH_TOKEN \
+      # #     --prod
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: nfp_kpAxsudkNMY3c8qkMbfBQSN2vScqkBLWbe86
+      #     NETLIFY_SITE_ID: 8f3ea6ff-e3d0-41bd-b8e6-2bce67fa4470    
+     
 
       # ✅ Email PASS
 
@@ -228,18 +225,6 @@ jobs:
                           <td style="border:1px solid #dddddd;">Skipped</td>
                           <td style="border:1px solid #dddddd;">${{ env.SKIPPED_TESTS }}</td>
                         </tr>
-                                                  <tr>
-                          <td style="border:1px solid #dddddd;">Flaky</td>
-                          <td style="border:1px solid #dddddd;">${{ env.FLAKY_TESTS }}</td>
-                        </tr>
-                        <tr>
-                          <td style="border:1px solid #dddddd;">Pass Percentage</td>
-                          <td style="border:1px solid #dddddd;">${{ env.PASS_PERCENTAGE }}%</td>
-                        </tr>
-                        <tr>
-                          <td style="border:1px solid #dddddd;">Execution Time</td>
-                          <td style="border:1px solid #dddddd;">${{ env.EXECUTION_TIME }}</td>
-                        </tr>
                       </table>
 
                       <h3 style="margin-top:25px;">Reports</h3>
@@ -247,6 +232,12 @@ jobs:
                       <p>
                         <a href="https://anova-html-report-ce92f9.netlify.app/" style="color:#0066cc;">
                           View Playwright HTML Report
+                        </a>
+                      </p>
+
+                      <p>
+                        <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" style="color:#0066cc;">
+                          View Allure Report (Download from artifacts)
                         </a>
                       </p>
 
@@ -278,6 +269,7 @@ jobs:
               </td>
               </tr>
                 </table>
+
 
       # ❌ Email FAIL (Detailed)
 
@@ -348,18 +340,6 @@ jobs:
                           <td style="border:1px solid #dddddd;">Skipped</td>
                           <td style="border:1px solid #dddddd;">${{ env.SKIPPED_TESTS }}</td>
                         </tr>
-                          <tr>
-                          <td style="border:1px solid #dddddd;">Flaky</td>
-                          <td style="border:1px solid #dddddd;">${{ env.FLAKY_TESTS }}</td>
-                        </tr>
-                        <tr>
-                          <td style="border:1px solid #dddddd;">Pass Percentage</td>
-                          <td style="border:1px solid #dddddd;">${{ env.PASS_PERCENTAGE }}%</td>
-                        </tr>
-                        <tr>
-                          <td style="border:1px solid #dddddd;">Execution Time</td>
-                          <td style="border:1px solid #dddddd;">${{ env.EXECUTION_TIME }}</td>
-                        </tr>
                       </table>
 
                       <br>
@@ -375,6 +355,12 @@ jobs:
                       <p>
                         <a href="https://anova-html-report-ce92f9.netlify.app/" style="color:#0066cc;">
                           View Playwright HTML Report
+                        </a>
+                      </p>
+
+                      <p>
+                        <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" style="color:#0066cc;">
+                          View Allure Report (Download from artifacts)
                         </a>
                       </p>
 
@@ -406,6 +392,5 @@ jobs:
                 </td>
               </tr>
                 </table>
-
 
            

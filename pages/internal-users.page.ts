@@ -126,7 +126,7 @@ export class InternalUsersPage {
     await this.clickAddNewInternalUser();
     await this.fillUserForm(name, email, phone, role, status);
     await this.saveUser();
-    console.log(`✅ Internal user created: ${email}`);
+    console.log(`Internal user created: ${email}`);
   }
 
   async editInternalUser(newName: string, newPhone: string): Promise<void> {
@@ -137,6 +137,6 @@ export class InternalUsersPage {
     await this.page.getByRole('option', { name: 'Inactive' }).click();
     await this.buttonSave.click();
     await this.buttonOkay.click();
-    console.log(`✅ Internal user updated: ${newName}`);
+    console.log(`Internal user updated: ${newName}`);
   }
 }
