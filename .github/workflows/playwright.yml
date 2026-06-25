@@ -62,7 +62,6 @@ jobs:
           path: test-results/
 
 
-
       # ✅ Deploy HTML Report (Public)
 
       - name: Deploy Report to GitHub Pages
