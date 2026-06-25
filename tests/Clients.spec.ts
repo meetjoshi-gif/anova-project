@@ -26,7 +26,7 @@ test.describe('Clients User Management', () => {
     // Store page for use in all tests
     sharedPage = page;
 
-    console.log('✅ Admin logged in successfully - Clients user');
+    console.log('Admin logged in successfully - Clients user');
   });
 
   test('Test 1 - Create Client with Unique Name', async () => {
@@ -41,7 +41,7 @@ test.describe('Clients User Management', () => {
     // Create client
     await clientsPage.createClient(companyName, phone);
 
-    console.log('✅ Client created successfully:', companyName);
+    console.log('Client created successfully:', companyName);
   });
 
   test('Test 2 - Search Client', async () => {
@@ -49,7 +49,7 @@ test.describe('Clients User Management', () => {
     await clientsPage.navigateToClients();
     await clientsPage.searchClient(createdCompany);
 
-    console.log('✅ Client searched successfully');
+    console.log('Client searched successfully');
   });
 
   test('Test 3 - Edit Client', async () => {
@@ -62,7 +62,7 @@ test.describe('Clients User Management', () => {
 
     await clientsPage.editClient(createdCompany, dba, mc, dot, taxId);
 
-    console.log('✅ Client edited successfully with inactive status');
+    console.log('Client edited successfully with inactive status');
   });
 
   test('Test 4 - Filter and Column', async () => {
@@ -73,7 +73,7 @@ test.describe('Clients User Management', () => {
     // await clientsPage.configureColumns();
     // await clientsPage.resetColumns();
 
-    console.log('✅ Filter and column functionality verified successfully');
+    console.log('Filter and column functionality verified successfully');
   });
 
   test('Test 5 - Export Clients', async () => {
@@ -81,7 +81,7 @@ test.describe('Clients User Management', () => {
     await clientsPage.navigateToClients();
     await clientsPage.exportClients();
 
-    console.log('✅ Export XLS functionality verified successfully');
+    console.log('Export XLS functionality verified successfully');
   });
   
   test.afterAll(async () => {

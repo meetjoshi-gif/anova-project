@@ -21,7 +21,7 @@ test.describe.serial('Claims module', () => {
 
         await page.getByRole('button', { name: 'Log In' }).click();
 
-        await page.waitForTimeout(5000);
+        await page.waitForTimeout(2000);
 
         console.log('Login Successful for Third-party claims');
     });

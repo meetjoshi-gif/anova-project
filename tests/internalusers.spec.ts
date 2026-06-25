@@ -26,7 +26,7 @@ test.describe('Internal User Management', () => {
     // Store page for use in all tests
     sharedPage = page;
 
-    console.log('✅ Admin logged in successfully - Internal user');
+    console.log('Admin logged in successfully - Internal user');
   });
 
 
@@ -44,7 +44,7 @@ test.describe('Internal User Management', () => {
     // Create internal user
     await internalUsersPage.createInternalUser(name, email, phone, 'Admin', 'Active');
 
-    console.log('✅ Internal user created successfully');
+    console.log('Internal user created successfully');
   });
 
   test('Test 2 - Search Internal Users', async () => {
@@ -54,7 +54,7 @@ test.describe('Internal User Management', () => {
     await internalUsersPage.applySearch();
     await internalUsersPage.resetSearch();
 
-    console.log('✅ Search and reset functionality verified successfully');
+    console.log('Search and reset functionality verified successfully');
   });
 
   test('Test 3 - Edit Internal Users', async () => {
@@ -64,7 +64,7 @@ test.describe('Internal User Management', () => {
 
     await internalUsersPage.editInternalUser(updatedName, updatedPhone);
     // Status changed from Active to Inactive in the editInternalUser method
-    console.log('✅ Internal user edited successfully with status change to Inactive');
+    console.log('Internal user edited successfully with status change to Inactive');
   });
 
   test('Test 4 - Filter Internal Users', async () => {
@@ -73,7 +73,7 @@ test.describe('Internal User Management', () => {
     await internalUsersPage.applyFilter('Admin', 'Anova');
     await internalUsersPage.resetFilter();
 
-    console.log('✅ Filter and reset functionality verified successfully');
+    console.log('Filter and reset functionality verified successfully');
   });
 
   test('Test 5 - Export Internal Users as XLS', async () => {
@@ -81,7 +81,7 @@ test.describe('Internal User Management', () => {
     await internalUsersPage.navigateToInternalUsers();
     await internalUsersPage.exportAsXLS();
 
-    console.log('✅ Export XLS functionality verified successfully');
+    console.log('Export XLS functionality verified successfully');
   });
   
   test.afterAll(async () => {

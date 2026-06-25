@@ -11,7 +11,7 @@ test('High Vaule Flow', async ({ page }) => {
 
   // Login
   await loginPage.navigate();
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(2000);
   await loginPage.login('keri.anderson97+admin@gmail.com', '123456');
   console.log('Login successful for HighValue request');
 
