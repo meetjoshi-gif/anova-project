@@ -3,7 +3,7 @@ import { LoginPage } from '../../pages/login.page';
 import { AILiabilityPage } from '../../pages/AiLiability.page';
 
 test('AI Liability Flow', async ({ page }) => {
-  test.setTimeout(200000);
+  test.setTimeout(100000);
   await page.setViewportSize({ width: 1920, height: 1080 });
   const loginPage = new LoginPage(page);
   const certificatePage = new AILiabilityPage(page);

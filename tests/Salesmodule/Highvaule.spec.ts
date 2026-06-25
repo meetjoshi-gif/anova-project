@@ -4,7 +4,7 @@ import { HighVauleRequestPage } from '../../pages/Highvaule.page';
 
 
 test('High Vaule Flow', async ({ page }) => {
-  test.setTimeout(200000);
+  test.setTimeout(100000);
  await page.setViewportSize({ width: 1920, height: 1080 });
   const loginPage = new LoginPage(page);
   const certificatePage = new HighVauleRequestPage(page);
