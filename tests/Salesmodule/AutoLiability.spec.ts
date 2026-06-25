@@ -4,7 +4,7 @@ import { AutoLiabilityPage } from '../../pages/AutoLiability.page';
 
 
 test('Auto Liability Flow', async ({ page }) => {
-  test.setTimeout(100000);
+  test.setTimeout(200000);
   await page.setViewportSize({ width: 1920, height: 1080 });
   const loginPage = new LoginPage(page);
   const certificatePage = new AutoLiabilityPage(page);

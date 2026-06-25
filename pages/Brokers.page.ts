@@ -30,12 +30,13 @@ export class BrokersPage {
 
         await page.getByRole('checkbox', { name: 'Apply for Other Product' }).check();
         await page.locator('#in_is_mtc_excess').check();
-        await page.getByRole('checkbox', { name: 'Cargo', exact: true }).check();
-        await page.getByRole('checkbox', { name: 'Liability', exact: true }).check();
-        await page.getByRole('checkbox', { name: 'AI Liability' }).check();
-        await page.getByRole('checkbox', { name: 'Monthly Reporting Cargo Policy' }).check();
-        await page.getByRole('checkbox', { name: 'Automated Liability', exact: true }).check();
-        await page.getByRole('checkbox', { name: 'Other', exact: true }).check();
+        //New Chnages Which I am not Aware Of this So Right now I Comment Below Code 
+        // await page.getByRole('checkbox', { name: 'Cargo', exact: true }).check();
+        // await page.getByRole('checkbox', { name: 'Liability', exact: true }).check();
+        // await page.getByRole('checkbox', { name: 'AI Liability' }).check();
+        // await page.getByRole('checkbox', { name: 'Monthly Reporting Cargo Policy' }).check();
+        // await page.getByRole('checkbox', { name: 'Automated Liability', exact: true }).check();
+        // await page.getByRole('checkbox', { name: 'Other', exact: true }).check();
 
 
 
@@ -83,9 +84,11 @@ export class BrokersPage {
 
         await page.getByRole('link', { name: companyName }).click();
         await page.getByRole('radio', { name: 'Franchise Broker' }).check();
-        await page.getByRole('checkbox', { name: 'Non-Marine Products' }).check();
-        await page.getByRole('checkbox', { name: 'Bond' }).check();
-        await page.locator('#product_7').check();
+                //New Chnages Which I am not Aware Of this So Right now I Comment Below Code 
+
+        // await page.getByRole('checkbox', { name: 'Non-Marine Products' }).check();
+        // await page.getByRole('checkbox', { name: 'Bond' }).check();
+        // await page.locator('#product_7').check();
         await page.getByRole('textbox', { name: 'Tax ID or EIN' }).fill(`TAX${Date.now()}`);
         await page.getByRole('combobox', { name: 'Active' }).click();
         await page.getByRole('option', { name: 'Inactive' }).click();

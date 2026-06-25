@@ -155,7 +155,8 @@ export class AILiabilityPage {
         const filePath = path.join(process.cwd(), 'uploads', 'Claimupload.pdf');
         await page.getByRole('button', { name: 'Choose File' }).setInputFiles(filePath);
         await page.getByRole('textbox', { name: 'Custom File Name' }).fill('Endorsement Test');
-        await page.locator('#warehouseContainer').getByRole('button', { name: 'X' }).click();
+        //Comment the Code Before This filed there but right now remove this one from UI
+        // await page.locator('#warehouseContainer').getByRole('button', { name: 'X' }).click();
         await page.getByRole('button', { name: 'Continue' }).click();
 
         //Step 6

@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page,expect } from '@playwright/test';
 import path from 'path';
 
 
@@ -18,6 +18,9 @@ export class HighVauleRequestPage {
         const pendingText = page.getByText('You have one last pending');
 
         if (await pendingText.isVisible({ timeout: 2000 }).catch(() => false)) {
+//                   await page.getByRole('link', { name: 'Continue' }).click();
+// await expect(page.locator('text=Template policy not define for you!')).toBeVisible();
+
             await page.getByRole('radio', { name: 'No' }).check();
             await page.getByRole('combobox', { name: 'Select Option' }).first().click();
             await page.getByRole('option', { name: 'Fully boxed and palletized' }).click();
