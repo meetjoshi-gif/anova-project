@@ -199,8 +199,8 @@ export class HighVauleRequestPage {
         await page.locator('.btn.btn-sm.btn-icon').first().click();
         await page.getByRole('link', { name: 'View' }).click();
         await page.reload();
-
-        const randomAction = Math.random() < 0.5;
+// 90% Approve, 10% Reject
+        const randomAction = Math.random() < 0.9;
 
         if (randomAction) {
             await page.getByRole('link', { name: 'Approve' }).click();
